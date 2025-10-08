@@ -206,7 +206,8 @@ if misc.difficulty > 1 then
     rm.AddRecipeCategory("efficiency-module-3", "electromagnetics")
     rm.AddRecipeCategory("efficiency-module-3", "organic")
 
-    rm.SetRecipeCategory("quality-module-3", "electromagnetics")
+    rm.RemoveRecipeCategory("quality-module-3", "electronics")
+    rm.AddRecipeCategory("quality-module-3", "electromagnetics")
 
     data.raw.recipe["speed-module-3"].surface_conditions = {
         {
