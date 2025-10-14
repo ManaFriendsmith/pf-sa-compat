@@ -83,110 +83,116 @@ if mods["BrassTacks"] or mods["IfNickel"] or mods["ThemTharHills"] then
 end
 
 if mods["BrassTacks"] or mods["IfNickel"] then
-    data.raw.item["iron-plate"].localised_description = {"recipe-description.hint-nonstandard-recycling"}
-    data.raw.item["copper-plate"].localised_description = {"recipe-description.hint-nonstandard-recycling"}
-    data.raw.item["steel-plate"].localised_description = {"recipe-description.hint-nonstandard-recycling"}
+
+    if 1 == 2 then
+        data.raw.item["iron-plate"].localised_description = {"recipe-description.hint-nonstandard-recycling"}
+        data.raw.item["copper-plate"].localised_description = {"recipe-description.hint-nonstandard-recycling"}
+        data.raw.item["steel-plate"].localised_description = {"recipe-description.hint-nonstandard-recycling"}
+
+        data:extend({
+            {
+                type = "recipe",
+                name = "custom-iron-plate-recycling",
+                localised_name = {"recipe-name.recycling", {"item-name.iron-plate"}},
+                icons = {
+                        {
+                            icon = "__quality__/graphics/icons/recycling.png",
+                            icon_size = 64
+                        },
+                        {
+                            icon = "__base__/graphics/icons/iron-plate.png",
+                            icon_size = 64
+                        },
+                        {
+                            icon = "__quality__/graphics/icons/recycling-top.png",
+                            icon_size = 64
+                        }
+                },
+                category = "recycling",
+                ingredients = {
+                    {type="item", name="iron-plate", amount=1}
+                },
+                results = {
+                    {type="item", name="iron-ore", amount=1, probability = 0.06}
+                },
+                bespoke = "iron-plate",
+                energy_required = 3.2/16,
+                allow_productivity = false,
+                enabled = true,
+                hidden = true,
+                allow_decomposition = false,
+                unlock_results = false
+            },
+            {
+                type = "recipe",
+                name = "custom-copper-plate-recycling",
+                localised_name = {"recipe-name.recycling", {"item-name.copper-plate"}},
+                icons = {
+                        {
+                            icon = "__quality__/graphics/icons/recycling.png",
+                            icon_size = 64
+                        },
+                        {
+                            icon = "__base__/graphics/icons/copper-plate.png",
+                            icon_size = 64
+                        },
+                        {
+                            icon = "__quality__/graphics/icons/recycling-top.png",
+                            icon_size = 64
+                        }
+                },
+                category = "recycling",
+                ingredients = {
+                    {type="item", name="copper-plate", amount=1}
+                },
+                results = {
+                    {type="item", name="copper-ore", amount=1, probability = 0.06}
+                },
+                bespoke = "copper-plate",
+                energy_required = 3.2/16,
+                allow_productivity = false,
+                enabled = true,
+                hidden = true,
+                allow_decomposition = false,
+                unlock_results = false
+            },
+            {
+                type = "recipe",
+                name = "custom-steel-plate-recycling",
+                localised_name = {"recipe-name.recycling", {"item-name.steel-plate"}},
+                icons = {
+                        {
+                            icon = "__quality__/graphics/icons/recycling.png",
+                            icon_size = 64
+                        },
+                        {
+                            icon = "__base__/graphics/icons/steel-plate.png",
+                            icon_size = 64
+                        },
+                        {
+                            icon = "__quality__/graphics/icons/recycling-top.png",
+                            icon_size = 64
+                        }
+                },
+                category = "recycling",
+                ingredients = {
+                    {type="item", name="steel-plate", amount=1}
+                },
+                results = {
+                    {type="item", name="iron-ore", amount=1, probability = 0.18}
+                },
+                bespoke = "steel-plate",
+                energy_required = 1,
+                allow_productivity = false,
+                enabled = true,
+                hidden = true,
+                allow_decomposition = false,
+                unlock_results = false
+            },
+        })
+    end
 
     data:extend({
-        {
-            type = "recipe",
-            name = "custom-iron-plate-recycling",
-            localised_name = {"recipe-name.recycling", {"item-name.iron-plate"}},
-            icons = {
-                      {
-                        icon = "__quality__/graphics/icons/recycling.png",
-                        icon_size = 64
-                      },
-                      {
-                        icon = "__base__/graphics/icons/iron-plate.png",
-                        icon_size = 64
-                      },
-                      {
-                        icon = "__quality__/graphics/icons/recycling-top.png",
-                        icon_size = 64
-                      }
-            },
-            category = "recycling",
-            ingredients = {
-                {type="item", name="iron-plate", amount=1}
-            },
-            results = {
-                {type="item", name="iron-ore", amount=1, probability = 0.06}
-            },
-            bespoke = "iron-plate",
-            energy_required = 3.2/16,
-            allow_productivity = false,
-            enabled = true,
-            hidden = true,
-            allow_decomposition = false,
-            unlock_results = false
-        },
-        {
-            type = "recipe",
-            name = "custom-copper-plate-recycling",
-            localised_name = {"recipe-name.recycling", {"item-name.copper-plate"}},
-            icons = {
-                      {
-                        icon = "__quality__/graphics/icons/recycling.png",
-                        icon_size = 64
-                      },
-                      {
-                        icon = "__base__/graphics/icons/copper-plate.png",
-                        icon_size = 64
-                      },
-                      {
-                        icon = "__quality__/graphics/icons/recycling-top.png",
-                        icon_size = 64
-                      }
-            },
-            category = "recycling",
-            ingredients = {
-                {type="item", name="copper-plate", amount=1}
-            },
-            results = {
-                {type="item", name="copper-ore", amount=1, probability = 0.06}
-            },
-            bespoke = "copper-plate",
-            energy_required = 3.2/16,
-            allow_productivity = false,
-            enabled = true,
-            hidden = true,
-            allow_decomposition = false,
-            unlock_results = false
-        },
-        {
-            type = "recipe",
-            name = "custom-steel-plate-recycling",
-            localised_name = {"recipe-name.recycling", {"item-name.steel-plate"}},
-            icons = {
-                      {
-                        icon = "__quality__/graphics/icons/recycling.png",
-                        icon_size = 64
-                      },
-                      {
-                        icon = "__base__/graphics/icons/steel-plate.png",
-                        icon_size = 64
-                      },
-                      {
-                        icon = "__quality__/graphics/icons/recycling-top.png",
-                        icon_size = 64
-                      }
-            },
-            category = "recycling",
-            ingredients = {
-                {type="item", name="steel-plate", amount=1}
-            },
-            results = {
-                {type="item", name="iron-ore", amount=1, probability = 0.18}
-            },
-            bespoke = "steel-plate",
-            energy_required = 1,
-            allow_productivity = false,
-            enabled = true,
-            hidden = true,
-            allow_decomposition = false,
-            unlock_results = false
-        },
         {
             type = "item",
             name = "philosophers-hormone",
