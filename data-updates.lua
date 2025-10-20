@@ -183,6 +183,10 @@ if data.raw.item["quantum-encabulator"] then
     end
 end
 
+if mods["Paracelsin"] then
+    tm.AddSciencePack("full-spectrum-magmallurgy", "galvanization-science-pack")
+end
+
 data.raw.module["efficiency-module-2"].effect = {
     consumption = -0.5,
     pollution = -0.1
@@ -279,6 +283,10 @@ if misc.difficulty > 1 then
         if not (mods["no-more-quality"] or mods["unquality"] or mods["no-quality"]) then
             tm.AddPrerequisite("fusion-reactor", "quality-module-3")
             rm.AddIngredient("fusion-reactor", "quality-module-3")
+        end
+
+        if mods["Paracelsin"] then
+            tm.AddSciencePack("productivity-module-3", "galvanization-science-pack")
         end
     else
         data.raw.recipe["productivity-module-3"].surface_conditions = {
