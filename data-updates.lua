@@ -185,6 +185,10 @@ end
 
 if mods["Paracelsin"] then
     tm.AddSciencePack("full-spectrum-magmallurgy", "galvanization-science-pack")
+    if settings.startup["planetfall-postgame-logistics"].value then
+        tm.AddSciencePack("superposition-transport-belt", "galvanization-science-pack")
+        tm.AddSciencePack("extradimensional-cargo-space", "galvanization-science-pack")
+    end
 end
 
 data.raw.module["efficiency-module-2"].effect = {

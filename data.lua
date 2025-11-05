@@ -2,6 +2,7 @@ require("prototypes/asteroids")
 local item_sounds = require("__base__.prototypes.item_sounds")
 
 local misc = require("__pf-functions__/misc")
+local rm = require("__pf-functions__/recipe-manipulation")
 
 if misc.difficulty > 1 then
     data:extend(
@@ -456,4 +457,512 @@ if tune_up_data then
         energy_required = 20,
         ingredients = {{{"supercapacitor", 1}, {"tracker", 1}}, {{"supercapacitor", 1}, {"processing-unit", 1}}}
     }
+end
+
+if settings.startup["planetfall-postgame-logistics"].value then
+    local function promethify_recursive(some_table)
+        if type(some_table) ~= "table" then
+            return
+        end
+        for k, v in pairs(some_table) do
+            if type(v) == "string" and k ~= "particle_name" then
+                local newstring = string.gsub(v, "turbo", "superposition")
+                newstring = string.gsub(newstring, "__space", "__pf-sa")
+                newstring = string.gsub(newstring, "age__", "compat__")
+                some_table[k] = newstring
+            end
+            if type(v) == "table" then
+                promethify_recursive(v)
+            end
+        end
+    end
+
+    local function promethify(prototype)
+        local newprototype = table.deepcopy(prototype)
+        promethify_recursive(newprototype)
+        if newprototype.order then
+            newprototype.order = string.gsub(newprototype.order, "d", "e")
+        end
+        if newprototype.speed then
+            newprototype.speed = newprototype.speed * 2
+        end
+        data:extend({newprototype})
+    end
+
+    promethify(data.raw["transport-belt"]["turbo-transport-belt"])
+    promethify(data.raw["corpse"]["turbo-transport-belt-remnants"])
+    promethify(data.raw["explosion"]["turbo-transport-belt-explosion"])
+    promethify(data.raw["item"]["turbo-transport-belt"])
+
+    promethify(data.raw["underground-belt"]["turbo-underground-belt"])
+    promethify(data.raw["corpse"]["turbo-underground-belt-remnants"])
+    promethify(data.raw["explosion"]["turbo-underground-belt-explosion"])
+    promethify(data.raw["item"]["turbo-underground-belt"])
+
+    promethify(data.raw["splitter"]["turbo-splitter"])
+    promethify(data.raw["corpse"]["turbo-splitter-remnants"])
+    promethify(data.raw["explosion"]["turbo-splitter-explosion"])
+    promethify(data.raw["item"]["turbo-splitter"])
+    
+    promethify(data.raw["loader"]["turbo-loader"])
+    promethify(data.raw["item"]["turbo-loader"])
+
+    promethify(data.raw["explosion"]["turbo-transport-belt-explosion-base"])
+    promethify(data.raw["explosion"]["turbo-underground-belt-explosion-base"])
+
+    data.raw["underground-belt"]["superposition-underground-belt"].max_distance = 13
+    data.raw["splitter"]["superposition-splitter"].frozen_patch = data.raw["splitter"]["turbo-splitter"].frozen_patch
+    data.raw["underground-belt"]["superposition-underground-belt"].structure.frozen_patch_in = data.raw["underground-belt"]["turbo-underground-belt"].structure.frozen_patch_in
+    data.raw["underground-belt"]["superposition-underground-belt"].structure.frozen_patch_out = data.raw["underground-belt"]["turbo-underground-belt"].structure.frozen_patch_out
+
+    local new_cargo_wagon = table.deepcopy(data.raw["cargo-wagon"]["cargo-wagon"])
+    new_cargo_wagon.name = "extradimensional-cargo-wagon"
+    new_cargo_wagon.minable.result = "extradimensional-cargo-wagon"
+    new_cargo_wagon.weight = 500
+    new_cargo_wagon.inventory_size = 100
+    new_cargo_wagon.quality_affects_inventory_size = true
+    new_cargo_wagon.icon = nil
+    new_cargo_wagon.icons = {{
+        icon = "__base__/graphics/icons/cargo-wagon.png",
+        icon_size = 64,
+        tint = {r=0.7,g=0.8,b=1}
+    }}
+    for k, v in pairs(new_cargo_wagon.pictures.rotated.layers) do
+        v.tint = {r=0.5,g=0.75,b=1}
+        v.apply_runtime_tint = false
+    end
+    for k, v in pairs(new_cargo_wagon.pictures.sloped.layers) do
+        v.tint = {r=0.5,g=0.75,b=1}
+        v.apply_runtime_tint = false
+    end
+    for k, v in pairs(new_cargo_wagon.horizontal_doors.layers) do
+        v.tint = {r=0.5,g=0.75,b=1}
+        v.apply_runtime_tint = false
+    end
+    for k, v in pairs(new_cargo_wagon.vertical_doors.layers) do
+        v.tint = {r=0.5,g=0.75,b=1}
+        v.apply_runtime_tint = false
+    end
+    new_cargo_wagon.factoriopedia_simulation.init = [[
+    game.simulation.camera_position = {1, 0.5}
+    game.surfaces[1].create_entities_from_blueprint_string
+    {
+      string = "0eNqNk91uwjAMhd/F1wFR2gDtq6CpSotXrKUOSsKfqr77XMrGBZuUy5z4fLZle4DGnvHkiSNUA1DrOEC1HyBQx8ZOGpseoQJvyMKogPiAN6iy8UMBcqRIODsej3vN575BLwHqxxmieLtjXDwQCk4uiMvxBBeS3iq4Q1VogR/IYzv/FaN6Y66TmWUyM09lbrJkZvHLxJtAD9QjB4k2dtEa37nF1XTifU+RLzO9WetXImTTWKyt6yhEakN9PZK8e3ch7qD6NDagAudJKjAzabXc6mlMF5GcFxCfrf2jSJ3ceJ7c+CaZqZOZ22Rm+iLtkpn/LZJsf4iu/arlYniWn4czqc8IithLjteJKbigDw+EzLksylLvsrwsV8U4fgMdVy/B",
+      position = {0, 0}
+    }
+  ]]
+    local new_cargo_wagon_item = table.deepcopy(data.raw["item-with-entity-data"]["cargo-wagon"])
+    new_cargo_wagon_item.name = "extradimensional-cargo-wagon"
+    new_cargo_wagon_item.place_result = "extradimensional-cargo-wagon"
+    new_cargo_wagon_item.weight = 200 * kg
+    new_cargo_wagon_item.icon = nil
+    new_cargo_wagon_item.icons = {{
+        icon = "__base__/graphics/icons/cargo-wagon.png",
+        icon_size = 64,
+        tint = {r=0.6,g=0.8,b=1}
+    }}
+
+    local new_fluid_wagon = table.deepcopy(data.raw["fluid-wagon"]["fluid-wagon"])
+    new_fluid_wagon.name = "extradimensional-fluid-wagon"
+    new_fluid_wagon.minable.result = "extradimensional-fluid-wagon"
+    new_fluid_wagon.weight = 500
+    new_fluid_wagon.capacity = 100000
+    new_fluid_wagon.quality_affects_capacity = true
+    new_fluid_wagon.icon = nil
+    new_fluid_wagon.icons = {{
+        icon = "__base__/graphics/icons/fluid-wagon.png",
+        icon_size = 64,
+        tint = {r=0.7,g=0.8,b=1}
+    }}
+    new_fluid_wagon.factoriopedia_simulation.init = [[
+    game.simulation.camera_position = {1, 0.5}
+    game.surfaces[1].create_entities_from_blueprint_string
+    {
+      string = "0eNqN081ugzAMAOB38TmtoBBoeJVpQim41FpIKpL+CfHuM9Cth25SjnHsz4lkj3AwFzwPZANUI1DjrIfqYwRPndVmjlndI1QwaDIwCSDb4h2qdPoUgDZQIFwrlsOjtpf+gAMniJ9KH7i2O4XNQgg4O89Vzs44S7IU8IAqV4y3NGCz3uWTeDN30aaKNrNYs0ijzfzXxDujLfVoPWdrszmaC7Wbm+649r1Ftk1UVspXI7T6YLA2riMfqPH17UR87t2VbAfVURuPAtxA/AK9Ssm2lH+8SUb/M4v+ZxFtymizjDbj52Yfbf43NzzsPrjmq+YFsWv4uSdz9JlBAXvu8dooAVcc/ELIYqdypeQ+zZRK8mn6Bk/IKZs=",
+      position = {0, 0}
+    }
+  ]]
+    for k, v in pairs(new_fluid_wagon.pictures.rotated.layers) do
+        v.tint = {r=0.5,g=0.75,b=1}
+        v.apply_runtime_tint = false
+    end
+    for k, v in pairs(new_fluid_wagon.pictures.sloped.layers) do
+        v.tint = {r=0.5,g=0.75,b=1}
+        v.apply_runtime_tint = false
+    end
+    local new_fluid_wagon_item = table.deepcopy(data.raw["item-with-entity-data"]["fluid-wagon"])
+    new_fluid_wagon_item.name = "extradimensional-fluid-wagon"
+    new_fluid_wagon_item.place_result = "extradimensional-fluid-wagon"
+    new_fluid_wagon_item.order = new_fluid_wagon_item.order .. "a"
+    new_fluid_wagon_item.weight = 200 * kg
+    new_fluid_wagon_item.icon = nil
+    new_fluid_wagon_item.icons = {{
+        icon = "__base__/graphics/icons/fluid-wagon.png",
+        icon_size = 64,
+        tint = {r=0.6,g=0.8,b=1}
+    }}
+
+    local new_cargo_bay = table.deepcopy(data.raw["cargo-bay"]["cargo-bay"])
+    new_cargo_bay.inventory_size_bonus = 40
+    new_cargo_bay.name = "extradimensional-cargo-bay"
+    new_cargo_bay.minable.result = "extradimensional-cargo-bay"
+    new_cargo_bay.icon = nil
+    new_cargo_bay.icons = {{
+        icon = "__space-age__/graphics/icons/cargo-bay.png",
+        icon_size = 64,
+        tint = {r=0.7,g=0.8,b=1}
+    }}
+    for k, v in pairs(new_cargo_bay.graphics_set.connections) do
+        for k2, v2 in pairs(v) do
+            for k3, v3 in pairs(v2) do
+                if v3.layers then
+                    v3.layers[1].tint = {r=0.5,g=0.75,b=1}
+                else
+                    v3.tint = {r=0.5,g=0.75,b=1}
+                end
+            end
+        end
+    end
+    for k, v in pairs(new_cargo_bay.graphics_set.picture) do
+        for k2, v2 in pairs(v.layers) do
+            if v2.layers then
+                v2.layers[1].tint = {r=0.5,g=0.75,b=1}
+            else
+                v2.tint = {r=0.5,g=0.75,b=1}
+            end
+        end
+    end
+    for k, v in pairs(new_cargo_bay.platform_graphics_set.connections) do
+        for k2, v2 in pairs(v) do
+            for k3, v3 in pairs(v2) do
+                if v3.layers then
+                    v3.layers[1].tint = {r=0.5,g=0.75,b=1}
+                else
+                    v3.tint = {r=0.5,g=0.75,b=1}
+                end
+            end
+        end
+    end
+    for k, v in pairs(new_cargo_bay.platform_graphics_set.picture) do
+        for k2, v2 in pairs(v.layers) do
+            if v2.layers then
+                v2.layers[1].tint = {r=0.5,g=0.75,b=1}
+            else
+                v2.tint = {r=0.5,g=0.75,b=1}
+            end
+        end
+    end
+    local new_cargo_bay_item = table.deepcopy(data.raw.item["cargo-bay"])
+    new_cargo_bay_item.name = "extradimensional-cargo-bay"
+    new_cargo_bay_item.place_result = "extradimensional-cargo-bay"
+    new_cargo_bay_item.weight = 200*kg
+    new_cargo_bay_item.icon = nil
+    new_cargo_bay_item.icons = {{
+        icon = "__space-age__/graphics/icons/cargo-bay.png",
+        icon_size = 64,
+        tint = {r=0.7,g=0.8,b=1}
+    }}
+
+    data:extend({
+        {
+            type = "recipe",
+            name = "superposition-transport-belt",
+            category = "cryogenics",
+            surface_conditions = {
+                {
+                    property = "gravity",
+                    max = 0
+                }
+            },
+            ingredients = {
+                {type="item", name="foundation", amount=2},
+                {type="item", name="turbo-transport-belt", amount=5},
+                {type="item", name="promethium-asteroid-chunk", amount=2}
+            },
+            results = {
+                {type="item", name="superposition-transport-belt", amount=1}
+            },
+            energy_required = 2,
+            enabled = false,
+            crafting_machine_tint =
+            {
+              primary = {0.5, 0, 1, 1},
+              secondary = {1, 0, 1, 1},
+              tertiary = {1, 0, 1, 1},
+              secondary = {0.5, 0, 1, 1},
+            }
+        },
+        {
+            type = "recipe",
+            name = "superposition-underground-belt",
+            category = "cryogenics",
+            surface_conditions = {
+                {
+                    property = "gravity",
+                    max = 0
+                }
+            },
+            ingredients = {
+                {type="item", name="foundation", amount=16},
+                {type="item", name="turbo-underground-belt", amount=10},
+                {type="item", name="promethium-asteroid-chunk", amount=16}
+            },
+            results = {
+                {type="item", name="superposition-underground-belt", amount=2}
+            },
+            energy_required = 2,
+            enabled = false,
+            crafting_machine_tint =
+            {
+              primary = {0.5, 0, 1, 1},
+              secondary = {1, 0, 1, 1},
+              tertiary = {1, 0, 1, 1},
+              secondary = {0.5, 0, 1, 1},
+            }
+        },
+        {
+            type = "recipe",
+            name = "superposition-splitter",
+            category = "cryogenics",
+            surface_conditions = {
+                {
+                    property = "gravity",
+                    max = 0
+                }
+            },
+            ingredients = {
+                {type="item", name="foundation", amount=2},
+                {type="item", name="turbo-splitter", amount=5},
+                {type="item", name="quantum-processor", amount=10},
+                {type="item", name="promethium-asteroid-chunk", amount=2}
+            },
+            results = {
+                {type="item", name="superposition-splitter", amount=1}
+            },
+            energy_required = 2,
+            enabled = false,
+            crafting_machine_tint =
+            {
+              primary = {0.5, 0, 1, 1},
+              secondary = {1, 0, 1, 1},
+              tertiary = {1, 0, 1, 1},
+              secondary = {0.5, 0, 1, 1},
+            }
+        },
+        {
+            type = "technology",
+            name = "superposition-transport-belt",
+            icons = {
+                {
+                    icon = "__pf-sa-compat__/graphics/technology/superposition-transport-belt.png",
+                    icon_size = 256,
+                    icon_mipmaps = 4
+                }
+            },
+            effects = {
+                {
+                    type = "unlock-recipe",
+                    recipe = "superposition-transport-belt"
+                },
+                {
+                    type = "unlock-recipe",
+                    recipe = "superposition-underground-belt"
+                },
+                {
+                    type = "unlock-recipe",
+                    recipe = "superposition-splitter"
+                }
+            },
+            prerequisites = {"promethium-science-pack", "foundation", "turbo-transport-belt"},
+            unit = {
+                count = 50000,
+                time = 60,
+                ingredients = {
+                    {"automation-science-pack", 1},
+                    {"logistic-science-pack", 1},
+                    {"military-science-pack", 1},
+                    {"chemical-science-pack", 1},
+                    {"production-science-pack", 1},
+                    {"utility-science-pack", 1},
+                    {"space-science-pack", 1},
+                    {"metallurgic-science-pack", 1},
+                    {"electromagnetic-science-pack", 1},
+                    {"agricultural-science-pack", 1},
+                    {"cryogenic-science-pack", 1},
+                    {"promethium-science-pack", 1}
+                }
+            }
+        },
+        {
+            type = "technology",
+            name = "superposition-insertion",
+            icons = {
+                {
+                    icon = "__pf-sa-compat__/graphics/technology/superposition-insertion.png",
+                    icon_size = 256,
+                    icon_mipmaps = 4
+                }
+            },
+            effects = {
+                {
+                    type = "inserter-stack-size-bonus",
+                    modifier = 2
+                },
+                {
+                    type = "bulk-inserter-capacity-bonus",
+                    modifier = 2
+                },
+                                {
+                    type = "belt-stack-size-bonus",
+                    modifier = 2
+                }
+            },
+            prerequisites = {"superposition-transport-belt", "transport-belt-capacity-2"},
+            research_trigger = {
+                type = "craft-item",
+                item = "superposition-transport-belt",
+                count = 1000
+            }
+        },
+        new_cargo_wagon,
+        new_cargo_wagon_item,
+        new_fluid_wagon,
+        new_fluid_wagon_item,
+        new_cargo_bay,
+        new_cargo_bay_item,
+        {
+            type = "recipe",
+            name = "extradimensional-cargo-wagon",
+            category = "cryogenics",
+            ingredients = {
+                {type="item", name="cargo-wagon", amount=10},
+                {type="item", name="quantum-processor", amount=20},
+                {type="item", name="electric-engine-unit", amount=30},
+                {type="fluid", name="fluoroketone-cold", amount=100},
+            },
+            results = {
+                {type="item", name="extradimensional-cargo-wagon", amount=1}
+            },
+            energy_required = 20,
+            enabled = false,
+            crafting_machine_tint =
+            {
+              primary = {0, 0.5, 1, 1},
+              secondary = {0, 1, 1, 1},
+              tertiary = {0, 1, 1, 1},
+              secondary = {0, 0.5, 1, 1},
+            }
+        },
+        {
+            type = "recipe",
+            name = "extradimensional-fluid-wagon",
+            category = "cryogenics",
+            ingredients = {
+                {type="item", name="fluid-wagon", amount=10},
+                {type="item", name="quantum-processor", amount=20},
+                {type="item", name="engine-unit", amount=30},
+                {type="fluid", name="fluoroketone-cold", amount=100},
+            },
+            results = {
+                {type="item", name="extradimensional-fluid-wagon", amount=1}
+            },
+            energy_required = 20,
+            enabled = false,
+            crafting_machine_tint =
+            {
+              primary = {0, 0.5, 1, 1},
+              secondary = {0, 1, 1, 1},
+              tertiary = {0, 1, 1, 1},
+              secondary = {0, 0.5, 1, 1},
+            }
+        },
+        {
+            type = "recipe",
+            name = "extradimensional-cargo-bay",
+            category = "cryogenics",
+            ingredients = {
+                {type="item", name="cargo-bay", amount=5},
+                {type="item", name="quantum-processor", amount=20},
+                {type="item", name="supercapacitor", amount=30},
+                {type="fluid", name="fluoroketone-cold", amount=100},
+            },
+            results = {
+                {type="item", name="extradimensional-cargo-bay", amount=1}
+            },
+            energy_required = 20,
+            enabled = false,
+            crafting_machine_tint =
+            {
+              primary = {0, 0.5, 1, 1},
+              secondary = {0, 1, 1, 1},
+              tertiary = {0, 1, 1, 1},
+              secondary = {0, 0.5, 1, 1},
+            }
+        },
+        {
+            type = "technology",
+            name = "extradimensional-cargo-space",
+            icons = {
+                {
+                    icon = "__pf-sa-compat__/graphics/technology/extradimensional-cargo-space.png",
+                    icon_size = 256,
+                    icon_mipmaps = 4
+                }
+            },
+            effects = {
+                {
+                    type = "unlock-recipe",
+                    recipe = "extradimensional-cargo-wagon"
+                },
+                {
+                    type = "unlock-recipe",
+                    recipe = "extradimensional-fluid-wagon"
+                },
+                {
+                    type = "unlock-recipe",
+                    recipe = "extradimensional-cargo-bay"
+                }
+            },
+            prerequisites = {"promethium-science-pack"},
+            unit = {
+                count = 50000,
+                time = 60,
+                ingredients = {
+                    {"automation-science-pack", 1},
+                    {"logistic-science-pack", 1},
+                    {"military-science-pack", 1},
+                    {"chemical-science-pack", 1},
+                    {"production-science-pack", 1},
+                    {"utility-science-pack", 1},
+                    {"space-science-pack", 1},
+                    {"metallurgic-science-pack", 1},
+                    {"electromagnetic-science-pack", 1},
+                    {"agricultural-science-pack", 1},
+                    {"cryogenic-science-pack", 1},
+                    {"promethium-science-pack", 1}
+                }
+            }
+        }
+    })
+
+    data.raw["utility-constants"].default.max_belt_stack_size = math.max(data.raw["utility-constants"].default.max_belt_stack_size, 6)
+    data.raw.inserter["stack-inserter"].max_belt_stack_size = math.max(data.raw.inserter["stack-inserter"].max_belt_stack_size, 6)
+
+    if data.raw.item["quantum-encabulator"] then
+        rm.MultiplyRecipe("superposition-transport-belt", 5)
+        rm.AddIngredient("superposition-transport-belt", "quantum-encabulator", 1)
+
+        rm.AddIngredient("superposition-underground-belt", "quantum-encabulator", 2)
+        
+        rm.MultiplyRecipe("superposition-splitter", 5)
+        rm.AddIngredient("superposition-splitter", "quantum-encabulator", 2)
+    else
+        rm.AddIngredient("superposition-transport-belt", "quantum-processor", 1)
+        rm.AddIngredient("superposition-underground-belt", "quantum-processor", 8)
+    end
+
+    if misc.difficulty == 3 and mods["BrassTacks"] and mods["IfNickel"] then
+        rm.AddIngredient("extradimensional-cargo-wagon", "spurving-bearing", 10)
+        rm.AddIngredient("extradimensional-fluid-wagon", "non-reversible-tremie-pipe", 10)
+    end
 end
