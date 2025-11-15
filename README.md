@@ -19,17 +19,9 @@ There are two ways to control the difficulty: a global setting that's part of pf
 - [BrimStuff](https://github.com/ManaFriendsmith/BrimStuff) - Reworks sulfur and chemistry. Rubber, explosives, waste processing. Heavily affects all planets + space platforms.
 - [LasingAround](https://github.com/ManaFriendsmith/LasingAround) - Adds helium. Lasers and advanced crafting machines. Heavily affects Nauvis, Fulgora, Aquilo.
 
-# RELATED
-
-- [Lasing Around Legacy](https://github.com/AtelierAmber/LasingAround) - a fork of the 1.1 mod. Retains backwards compatibility with old saves including overhaul mod support.
-
 # CREDITS
 
 - Planetfall - Design, code, original vector graphics
-- [AtelierAmber](https://github.com/AtelierAmber) - Lasing Around Legacy
-- Rawkius - Pre-2.0 Spanish localization (2.0 too frequently changing to warrant translating yet)
-- [Sigmaleph](https://sigmaleph.tumblr.com/) - Pre-2.0 Spanish localization for Lunar Landings compatibility
-- Vincent Van Gogh - Art rotators icon
 
 # LICENSE
 
