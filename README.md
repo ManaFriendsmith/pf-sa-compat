@@ -39,4 +39,4 @@ The assets derived from Factorio assets in this mod are:
 - look at this graph achievement
 - purple belts
 - zap sound effect
-- in fact there is only one asset that is 100% original (and one unused placeholder for that asset which was public domain diagram which i bolded a little.) it's the philosopher's hormone.
+- in fact there are only two assets that are 100% original. they're the philosopher's hormone and quantum encabulator.
