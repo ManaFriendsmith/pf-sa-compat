@@ -485,27 +485,30 @@ if settings.startup["planetfall-postgame-logistics"].value then
         end
         if newprototype.speed then
             newprototype.speed = newprototype.speed * 2
+            if not data.raw.item[newprototype.name].hidden then
+                prototype.next_upgrade = newprototype.name
+            end
         end
         data:extend({newprototype})
     end
 
+    promethify(data.raw["item"]["turbo-transport-belt"])
     promethify(data.raw["transport-belt"]["turbo-transport-belt"])
     promethify(data.raw["corpse"]["turbo-transport-belt-remnants"])
     promethify(data.raw["explosion"]["turbo-transport-belt-explosion"])
-    promethify(data.raw["item"]["turbo-transport-belt"])
 
+    promethify(data.raw["item"]["turbo-underground-belt"])
     promethify(data.raw["underground-belt"]["turbo-underground-belt"])
     promethify(data.raw["corpse"]["turbo-underground-belt-remnants"])
     promethify(data.raw["explosion"]["turbo-underground-belt-explosion"])
-    promethify(data.raw["item"]["turbo-underground-belt"])
 
+    promethify(data.raw["item"]["turbo-splitter"])
     promethify(data.raw["splitter"]["turbo-splitter"])
     promethify(data.raw["corpse"]["turbo-splitter-remnants"])
     promethify(data.raw["explosion"]["turbo-splitter-explosion"])
-    promethify(data.raw["item"]["turbo-splitter"])
     
-    promethify(data.raw["loader"]["turbo-loader"])
     promethify(data.raw["item"]["turbo-loader"])
+    promethify(data.raw["loader"]["turbo-loader"])
 
     promethify(data.raw["explosion"]["turbo-transport-belt-explosion-base"])
     promethify(data.raw["explosion"]["turbo-underground-belt-explosion-base"])
