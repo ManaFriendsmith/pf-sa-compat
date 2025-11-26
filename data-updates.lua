@@ -166,6 +166,9 @@ if misc.difficulty == 3 then
     if mods["IfNickel"] then
         rm.AddProduct("molten-nickel", "lava", 25)
     end
+    if mods["castra"] then
+        rm.AddProduct("advanced-nickel-processing", "lava", 20)
+    end
 end
 
 if data.raw.item["quantum-encabulator"] then
@@ -181,6 +184,11 @@ if data.raw.item["quantum-encabulator"] then
         rm.ReplaceIngredientProportional("aop-quantum-computer", "quantum-processor", "quantum-encabulator", 0.1)
         rm.ReplaceIngredientProportional("aop-core-miner", "quantum-processor", "quantum-encabulator", 0.1)
     end
+
+    if mods["castra"] then
+        rm.RemoveIngredient("promethium-science-pack", "lithium-battery")
+        rm.AddIngredient("quantum-encabulator", "lithium-battery", 5)
+    end
 end
 
 if mods["Paracelsin"] then
@@ -188,6 +196,22 @@ if mods["Paracelsin"] then
     if settings.startup["planetfall-postgame-logistics"].value then
         tm.AddSciencePack("superposition-transport-belt", "galvanization-science-pack")
         tm.AddSciencePack("extradimensional-cargo-space", "galvanization-science-pack")
+    end
+end
+
+if mods["castra"] then
+    tm.AddSciencePack("full-spectrum-magmallurgy", "battlefield-science-pack")
+    if settings.startup["planetfall-postgame-logistics"].value then
+        tm.AddSciencePack("superposition-transport-belt", "battlefield-science-pack")
+        tm.AddSciencePack("extradimensional-cargo-space", "battlefield-science-pack")
+    end
+end
+
+if mods["maraxsis"] then
+    tm.AddSciencePack("full-spectrum-magmallurgy", "hydraulic-science-pack")
+    if settings.startup["planetfall-postgame-logistics"].value then
+        tm.AddSciencePack("superposition-transport-belt", "hydraulic-science-pack")
+        tm.AddSciencePack("extradimensional-cargo-space", "hydraulic-science-pack")
     end
 end
 
