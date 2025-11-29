@@ -386,3 +386,5 @@ if settings.startup["planetfall-fulgora-islands-scaling"].value then
 
     data.raw["noise-expression"]["fulgora_grid"].expression = fulgora_island_size_base .. " - slider_to_linear(control:fulgora_islands:frequency, -" .. relative_fulgora_island_size_factor ..", " .. relative_fulgora_island_size_factor ..")"
 end
+
+require("compat.small-mod")
