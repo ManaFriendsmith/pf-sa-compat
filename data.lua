@@ -4,6 +4,8 @@ local item_sounds = require("__base__.prototypes.item_sounds")
 local misc = require("__pf-functions__/misc")
 local rm = require("__pf-functions__/recipe-manipulation")
 
+require("compat/lunar-landings-preparation")
+
 if misc.difficulty > 1 then
     data:extend(
     {
@@ -206,6 +208,7 @@ if mods["BrassTacks"] or mods["IfNickel"] then
             drop_sound = item_sounds.science_inventory_move,
             stack_size = 100,
             default_import_location = "gleba",
+            canonical_cost = 1,
             weight = 1*kg
         },
         {
@@ -839,7 +842,7 @@ if settings.startup["planetfall-postgame-logistics"].value then
             category = "cryogenics",
             ingredients = {
                 {type="item", name="cargo-wagon", amount=10},
-                {type="item", name="quantum-processor", amount=20},
+                {type="item", name="quantum-processor", amount=10},
                 {type="item", name="electric-engine-unit", amount=30},
                 {type="fluid", name="fluoroketone-cold", amount=100},
             },
@@ -862,7 +865,7 @@ if settings.startup["planetfall-postgame-logistics"].value then
             category = "cryogenics",
             ingredients = {
                 {type="item", name="fluid-wagon", amount=10},
-                {type="item", name="quantum-processor", amount=20},
+                {type="item", name="quantum-processor", amount=10},
                 {type="item", name="engine-unit", amount=30},
                 {type="fluid", name="fluoroketone-cold", amount=100},
             },
@@ -885,7 +888,7 @@ if settings.startup["planetfall-postgame-logistics"].value then
             category = "cryogenics",
             ingredients = {
                 {type="item", name="cargo-bay", amount=5},
-                {type="item", name="quantum-processor", amount=20},
+                {type="item", name="quantum-processor", amount=10},
                 {type="item", name="supercapacitor", amount=30},
                 {type="fluid", name="fluoroketone-cold", amount=100},
             },
@@ -965,7 +968,7 @@ if settings.startup["planetfall-postgame-logistics"].value then
     end
 
     if misc.difficulty == 3 and mods["BrassTacks"] and mods["IfNickel"] then
-        rm.AddIngredient("extradimensional-cargo-wagon", "spurving-bearing", 10)
-        rm.AddIngredient("extradimensional-fluid-wagon", "non-reversible-tremie-pipe", 10)
+        rm.AddIngredient("extradimensional-cargo-wagon", "spurving-bearing", 20)
+        rm.AddIngredient("extradimensional-fluid-wagon", "non-reversible-tremie-pipe", 20)
     end
 end
