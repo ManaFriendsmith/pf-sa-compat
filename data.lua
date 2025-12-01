@@ -48,7 +48,7 @@ if misc.difficulty > 1 then
     })
 end
 
-if mods["BrassTacks"] or mods["IfNickel"] or mods["ThemTharHills"] then
+if mods["BrassTacksMk2"] or mods["IfNickelMk2"] or mods["ThemTharHillsMk2"] then
     data:extend({
         {
             type = "technology",
@@ -85,7 +85,7 @@ if mods["BrassTacks"] or mods["IfNickel"] or mods["ThemTharHills"] then
     })
 end
 
-if mods["BrassTacks"] or mods["IfNickel"] then
+if mods["BrassTacksMk2"] or mods["IfNickelMk2"] then
 
     if 1 == 2 then
         data.raw.item["iron-plate"].localised_description = {"recipe-description.hint-nonstandard-recycling"}
@@ -380,7 +380,7 @@ if misc.difficulty > 1 then
     end
 end
 
-if misc.difficulty == 3 and mods["BrassTacks"] and mods["IfNickel"] and mods["ThemTharHills"] and mods["BrimStuff"] and mods["LasingAround"] then
+if misc.difficulty == 3 and mods["BrassTacksMk2"] and mods["IfNickelMk2"] and mods["ThemTharHillsMk2"] and mods["BrimStuffMk2"] and mods["LasingAroundMk2"] then
     data:extend({
         {
             type = "item",
@@ -967,7 +967,7 @@ if settings.startup["planetfall-postgame-logistics"].value then
         rm.AddIngredient("superposition-underground-belt", "quantum-processor", 8)
     end
 
-    if misc.difficulty == 3 and mods["BrassTacks"] and mods["IfNickel"] then
+    if misc.difficulty == 3 and mods["BrassTacksMk2"] and mods["IfNickelMk2"] then
         rm.AddIngredient("extradimensional-cargo-wagon", "spurving-bearing", 20)
         rm.AddIngredient("extradimensional-fluid-wagon", "non-reversible-tremie-pipe", 20)
     end

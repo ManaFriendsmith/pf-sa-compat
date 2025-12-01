@@ -46,7 +46,7 @@ if misc.difficulty > 1 then
         data.raw.recipe["maraxsis-hydrolox-rocket-fuel"].order = "c4"    
     end
 
-    if mods["IfNickel"] then
+    if mods["IfNickelMk2"] then
         data.raw.item["gimbaled-rocket-engine"].subgroup = "rocket-components"
         data.raw.item["gimbaled-rocket-engine"].order = "d"    
     end
@@ -62,7 +62,7 @@ table.insert(data.raw["simple-entity"]["fulgoran-ruin-vault"].minable.results, {
 table.insert(data.raw["simple-entity"]["fulgoran-ruin-vault"].minable.results, {type="item", name="accumulator", amount=4})
 table.insert(data.raw["simple-entity"]["fulgoran-ruin-vault"].minable.results, {type="item", name="medium-electric-pole", amount=6})
 
-if mods["IfNickel"] and mods["BrassTacks"] then
+if mods["IfNickelMk2"] and mods["BrassTacksMk2"] then
     rm.RemoveProduct("advanced-metallic-asteroid-crushing", "copper-ore", 4)
 
     data.raw.recipe["metallic-asteroid-crushing"].localised_name = {"recipe-name.ferrous-asteroid-crushing"}
@@ -98,7 +98,7 @@ if data.raw.item["philosophers-hormone"] then
     rm.RemoveIngredient("pentapod-egg", "nutrients", 10)
 end
 
-if mods["BrassTacks"] or mods["IfNickel"] or mods["BrimStuff"] then
+if mods["BrassTacksMk2"] or mods["IfNickelMk2"] or mods["BrimStuffMk2"] then
     --Multiple relevant intermediates in chemical plants, chemical plants are mostly obsoleted by cryos and biochambers anyway
     rm.AddIngredient("cryogenic-plant", "chemical-plant", 4)
     data.raw.item["chemical-plant"].weight = 50 * kg
@@ -137,10 +137,10 @@ end
 --minimal viable space platforms must now be a bit larger to accommodate more complex recipes for ammo and fuel/ox
 --to compensate, make thrusters slightly stronger
 local thruster_power = 1
-if mods["BrassTacks"] then
+if mods["BrassTacksMk2"] then
     thruster_power = 1.05
 end
-if mods["BrimStuff"] then
+if mods["BrimStuffMk2"] then
     if misc.difficulty == 1 then
         thruster_power = thruster_power + 0.15
     else
@@ -160,10 +160,10 @@ if misc.difficulty == 3 then
     --gleba is gleba
     rm.AddProduct("molten-iron", "lava", 25)
     rm.AddProduct("molten-copper", "lava", 25)
-    if mods["BrassTacks"] then
+    if mods["BrassTacksMk2"] then
         rm.AddProduct("molten-zinc", "lava", 25)
     end
-    if mods["IfNickel"] then
+    if mods["IfNickelMk2"] then
         rm.AddProduct("molten-nickel", "lava", 25)
     end
     if mods["castra"] then
@@ -395,11 +395,11 @@ if settings.startup["planetfall-fulgora-islands-scaling"].value then
         end
     end
     
-    fulgora_island_boost("BrassTacks", 10, 20, 25)
-    fulgora_island_boost("IfNickel", 10, 20, 25)
-    fulgora_island_boost("ThemTharHills", 10, 15, 20)
-    fulgora_island_boost("BrimStuff", 15, 20, 25)
-    fulgora_island_boost("LasingAround", 5, 20, 25)
+    fulgora_island_boost("BrassTacksMk2", 10, 20, 25)
+    fulgora_island_boost("IfNickelMk2", 10, 20, 25)
+    fulgora_island_boost("ThemTharHillsMk2", 10, 15, 20)
+    fulgora_island_boost("BrimStuffMk2", 15, 20, 25)
+    fulgora_island_boost("LasingAroundMk2", 5, 20, 25)
     
     --bz mods are generally less deeply integrated into crafting trees, their resources are needed in less absolute bulk, and have fewer intermediates, so will need less space for processing
     if mods["bzlead"] then

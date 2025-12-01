@@ -15,12 +15,12 @@ local asteroid_reprocessing = {
 
 local out_of = 5
 
-if mods["BrassTacks"] then
+if mods["BrassTacksMk2"] then
     asteroid_reprocessing["brassteroid-reprocessing"] = "brass-asteroid-chunk"
     out_of = out_of + 1
 end
 
-if mods["BrimStuff"] then
+if mods["BrimStuffMk2"] then
     asteroid_reprocessing["panspermia-asteroid-reprocessing"] = "panspermia-asteroid-chunk"
     out_of = out_of + 1
 end

@@ -151,14 +151,14 @@ end
 --medium_angle = 0.6
 --big_angle = 0.5
 --huge_angle = 0.4
-if mods["BrassTacks"] then
+if mods["BrassTacksMk2"] then
     populate_asteroid_spawn("brass-asteroid-chunk", 1)
     populate_asteroid_spawn("medium-brass-asteroid", 0.6)
     populate_asteroid_spawn("big-brass-asteroid", 0.5)
     populate_asteroid_spawn("huge-brass-asteroid", 0.4)
 end
 
-if mods["BrimStuff"] then
+if mods["BrimStuffMk2"] then
     populate_asteroid_spawn("panspermia-asteroid-chunk", 1)
     populate_asteroid_spawn("medium-panspermia-asteroid", 0.6)
     populate_asteroid_spawn("big-panspermia-asteroid", 0.5)
@@ -167,8 +167,8 @@ end
 
 --more asteroids means more strain on ammo. reduce asteroid health to compensate.
 local denominator = 3
-if mods["BrassTacks"] then denominator = denominator + 1 end
-if mods["BrimStuff"] then denominator = denominator + 1 end
+if mods["BrassTacksMk2"] then denominator = denominator + 1 end
+if mods["BrimStuffMk2"] then denominator = denominator + 1 end
 
 for k, v in pairs(data.raw.asteroid) do
     if not string.find(v.name, "promethium") then

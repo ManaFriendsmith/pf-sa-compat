@@ -58,7 +58,7 @@ local function duplicate_explosion(name, find, replace, color)
     end
 end
 
-if mods["BrassTacks"] then
+if mods["BrassTacksMk2"] then
 
     local brass_color = {0.81, 0.63, 0.23, 0.3}
 
@@ -136,7 +136,7 @@ if mods["BrassTacks"] then
 
 end
 
-if mods["BrimStuff"] then
+if mods["BrimStuffMk2"] then
 
     local moss_color = {0.32, 0.56, 0.39, 0.3}
 
