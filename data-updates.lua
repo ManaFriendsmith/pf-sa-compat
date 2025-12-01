@@ -228,8 +228,23 @@ data.raw.module["quality-module-3"].effect = {
     quality = 0.3
 }
 
+if mods["LunarLandings"] then
+    data.raw.technology["rocket-control-unit"].localised_name = {"technology-name.ll-rocket-control-unit"}
+    data.raw.technology["rocket-control-unit"].icon = "__pf-sa-compat__/graphics/technology/lunar-navigation-unit.png"
+    data.raw.item["ll-rocket-control-unit"].icon = "__pf-sa-compat__/graphics/icons/lunar-navigation-unit.png"
+
+    local function set_all_icons(prototype, icon)
+        for k, v in pairs(prototype.icons) do
+            v.icon = icon
+        end
+    end
+
+    set_all_icons(data.raw.item["ll-packed-rocket-control-unit"], "__pf-sa-compat__/graphics/icons/lunar-navigation-unit.png")
+    set_all_icons(data.raw.recipe["ll-pack-rocket-control-unit"], "__pf-sa-compat__/graphics/icons/lunar-navigation-unit.png")
+    set_all_icons(data.raw.recipe["ll-unpack-rocket-control-unit"], "__pf-sa-compat__/graphics/icons/lunar-navigation-unit.png")
+end
+
 if misc.difficulty > 1 then
-    
     rm.RemoveRecipeCategory("speed-module-3", "electronics")
     rm.AddRecipeCategory("speed-module-3", "electromagnetics")
     rm.AddRecipeCategory("speed-module-3", "metallurgy")
@@ -311,10 +326,31 @@ if misc.difficulty > 1 then
         if not (mods["no-more-quality"] or mods["unquality"] or mods["no-quality"]) then
             tm.AddPrerequisite("fusion-reactor", "quality-module-3")
             rm.AddIngredient("fusion-reactor", "quality-module-3")
+            rm.AddIngredient("fusion-generator", "quality-module-3")
         end
 
         if mods["Paracelsin"] then
             tm.AddSciencePack("productivity-module-3", "galvanization-science-pack")
+        end
+
+        if mods["LunarLandings"] then
+            tm.AddPrerequisite("ll-quantum-module", "promethium-science-pack")
+            tm.AddSciencePack("ll-quantum-module", "military-science-pack")
+            tm.AddSciencePack("ll-quantum-module", "space-science-pack")
+            tm.AddSciencePack("ll-quantum-module", "metallurgic-science-pack")
+            tm.AddSciencePack("ll-quantum-module", "electromagnetic-science-pack")
+            tm.AddSciencePack("ll-quantum-module", "agricultural-science-pack")
+            tm.AddSciencePack("ll-quantum-module", "cryogenic-science-pack")
+            tm.AddSciencePack("ll-quantum-module", "promethium-science-pack")
+            if mods["Paracelsin"] then
+                tm.AddSciencePack("ll-quantum-module", "galvanization-science-pack")
+            end
+            if mods["castra"] then
+                tm.AddSciencePack("ll-quantum-module", "battlefield-science-pack")
+            end
+            if mods["maraxsis"] then
+                tm.AddSciencePack("ll-quantum-module", "hydraulic-science-pack")
+            end
         end
     else
         data.raw.recipe["productivity-module-3"].surface_conditions = {
