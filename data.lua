@@ -3,6 +3,7 @@ local item_sounds = require("__base__.prototypes.item_sounds")
 
 local misc = require("__pf-functions__/misc")
 local rm = require("__pf-functions__/recipe-manipulation")
+local tm = require("__pf-functions__/technology-manipulation")
 
 require("compat/lunar-landings-preparation")
 
@@ -951,6 +952,51 @@ if settings.startup["planetfall-postgame-logistics"].value then
         }
     })
 
+    if mods["deadlock-beltboxes-loaders"] then
+        deadlock.add_tier({
+            transport_belt = "superposition-transport-belt",
+            colour = {r=192, g=0, b=255},
+            underground_belt = "superposition-underground-belt",
+            splitter = "superposition-splitter",
+            tech = "superposition-transport-belt",
+            order = "e",
+            loader_ingredients = {
+                {type="item", name="foundation", amount=2},
+                {type="item", name="promethium-asteroid-chunk", amount=10},
+                {type="item", name="turbo-transport-belt-loader", amount=5},
+            },
+            beltbox_ingredients = {
+                {type="item", name="foundation", amount=2},
+                {type="item", name="promethium-asteroid-chunk", amount=30},
+                {type="item", name="crusher", amount=5},
+                {type="item", name="turbo-transport-belt-beltbox", amount=5},
+            }
+        })
+        if data.raw["loader-1x1"]["turbo-transport-belt-loader"] then
+            tm.AddUnlock("superposition-transport-belt", "superposition-transport-belt-loader")
+            data.raw["loader-1x1"]["turbo-transport-belt-loader"].next_upgrade = "superposition-transport-belt-loader"
+            data.raw.recipe["superposition-transport-belt-loader"].surface_conditions = {
+                {
+                    property = "gravity",
+                    min = 0,
+                    max = 0
+                }
+            }
+        end
+        if data.raw.furnace["turbo-transport-belt-beltbox"] then
+            tm.AddUnlock("superposition-transport-belt", "superposition-transport-belt-beltbox")
+            tm.AddPrerequisite("superposition-transport-belt", "deadlock-stacking-4")
+            data.raw.furnace["turbo-transport-belt-beltbox"].next_upgrade = "superposition-transport-belt-beltbox"
+            data.raw.recipe["superposition-transport-belt-beltbox"].surface_conditions = {
+                {
+                    property = "gravity",
+                    min = 0,
+                    max = 0
+                }
+            }
+        end
+    end
+
     data.raw["utility-constants"].default.max_belt_stack_size = math.max(data.raw["utility-constants"].default.max_belt_stack_size, 6)
     data.raw.inserter["stack-inserter"].max_belt_stack_size = math.max(data.raw.inserter["stack-inserter"].max_belt_stack_size, 6)
 
@@ -962,9 +1008,14 @@ if settings.startup["planetfall-postgame-logistics"].value then
         
         rm.MultiplyRecipe("superposition-splitter", 5)
         rm.AddIngredient("superposition-splitter", "quantum-encabulator", 2)
+
+        rm.AddIngredient("superposition-transport-belt-loader", "quantum-encabulator", 1)
+        rm.AddIngredient("superposition-transport-belt-beltbox", "quantum-encabulator", 5)
     else
         rm.AddIngredient("superposition-transport-belt", "quantum-processor", 1)
         rm.AddIngredient("superposition-underground-belt", "quantum-processor", 8)
+        rm.AddIngredient("superposition-transport-belt-loader", "quantum-processor", 5)
+        rm.AddIngredient("superposition-transport-belt-beltbox", "quantum-processor", 10)
     end
 
     if misc.difficulty == 3 and mods["BrassTacksMk2"] and mods["IfNickelMk2"] then
