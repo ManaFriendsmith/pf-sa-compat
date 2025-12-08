@@ -105,7 +105,8 @@ if mods["BrassTacksMk2"] or mods["IfNickelMk2"] then
                         },
                         {
                             icon = "__base__/graphics/icons/iron-plate.png",
-                            icon_size = 64
+                            icon_size = 64,
+                            scale = 0.33
                         },
                         {
                             icon = "__quality__/graphics/icons/recycling-top.png",
@@ -138,7 +139,8 @@ if mods["BrassTacksMk2"] or mods["IfNickelMk2"] then
                         },
                         {
                             icon = "__base__/graphics/icons/copper-plate.png",
-                            icon_size = 64
+                            icon_size = 64,
+                            scale = 0.33
                         },
                         {
                             icon = "__quality__/graphics/icons/recycling-top.png",
@@ -171,7 +173,8 @@ if mods["BrassTacksMk2"] or mods["IfNickelMk2"] then
                         },
                         {
                             icon = "__base__/graphics/icons/steel-plate.png",
-                            icon_size = 64
+                            icon_size = 64,
+                            scale = 0.33
                         },
                         {
                             icon = "__quality__/graphics/icons/recycling-top.png",
@@ -240,6 +243,7 @@ if mods["BrassTacksMk2"] or mods["IfNickelMk2"] then
                 {type="item", name="philosophers-hormone", amount=1},
                 {type="item", name=misc.difficulty == 3 and "copper-bacteria" or "iron-bacteria", amount=1, probability=0.15, ignored_by_stats=1}
             },
+            auto_recycle = false,
             energy_required = 1,
             allow_productivity = true,
             allow_decomposition = false,
@@ -278,6 +282,7 @@ if mods["BrassTacksMk2"] or mods["IfNickelMk2"] then
                 {type="item", name="philosophers-hormone", amount=1},
                 {type="item", name=misc.difficulty == 3 and "iron-bacteria" or "copper-bacteria", amount=1, probability=0.15, ignored_by_stats=1}
             },
+            auto_recycle = false,
             energy_required = 1,
             allow_productivity = true,
             allow_decomposition = false,
@@ -423,6 +428,7 @@ if misc.difficulty == 3 and mods["BrassTacksMk2"] and mods["IfNickelMk2"] and mo
                 {type="item", name="quantum-encabulator", amount=1, ignored_by_productivity=1},
                 {type="item", name="scrap", amount=15}
             },
+            auto_recycle = false,
             main_product = "quantum-encabulator",
             energy_required = 15,
             allow_productivity = true,

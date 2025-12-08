@@ -1,5 +1,6 @@
 require("asteroid-spawn-frequency")
 local rm = require("__pf-functions__/recipe-manipulation")
+local misc = require("__pf-functions__/misc.lua")
 
 
 --really? you're going to make me do this?
@@ -35,4 +36,8 @@ for k, v in pairs(asteroid_reprocessing) do
         end
     end
     data.raw.recipe[k].results = table.deepcopy(result_list)
+end
+
+if mods["quality"] and misc.last_pf_mod == "pf-sa-compat" then
+    require("__quality__/data-updates.lua")
 end

@@ -1,11 +1,11 @@
 {
     "name": "pf-sa-compat",
-    "version": "0.1.0",
+    "version": "1.0.0",
     "title": "PF Space Age compatibility",
     "author": "planetfall",
     "homepage": "",
     "description": "Contains Space Age exclusive code and graphics for my resource mods.",
     "factorio_version": "2.0",
-    "dependencies": ["base >= 2.0", "pf-functions", "space-age", "~ ZZZ-RecyclerFinalFinal", "? LunarLandings"],
+    "dependencies": ["base >= 2.0", "pf-functions", "space-age", "? LunarLandings"],
     "space_travel_required": true
 }
