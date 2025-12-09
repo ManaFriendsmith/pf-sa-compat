@@ -424,3 +424,7 @@ if settings.startup["planetfall-fulgora-islands-scaling"].value then
 end
 
 require("compat.small-mod")
+
+if mods["quality"] and misc.last_pf_mod == "pf-sa-compat" then
+    require("__quality__/data-updates.lua")
+end
