@@ -104,6 +104,9 @@ if mods["BrassTacksMk2"] or mods["IfNickelMk2"] or mods["BrimStuffMk2"] then
     data.raw.item["chemical-plant"].weight = 50 * kg
 end
 
+--the point of this is to make space science production require either rocket parts or production of more complex items using advanced asteroid processing
+--obviously the latter is "cheaper" but having it fully self sufficient requires some weird actions to get e.g. lubricant in space
+--or just install muluna i guess
 if misc.difficulty == 3 then
     local candidate_intermediates = {"gyro", "invar-plate", "stepper-motor", "differential-girdlespring"}
     local multiplier = 1
@@ -114,10 +117,13 @@ if misc.difficulty == 3 then
     end
     if multiplier > 1 then
         rm.RemoveProduct("space-science-pack", "space-science-pack", 1)
+        rm.RemoveProduct("space-science-pack-muluna", "space-science-pack", 1)
         rm.MultiplyRecipe("space-science-pack", multiplier)
+        rm.MultiplyRecipe("space-science-pack-muluna", multiplier)
         for k, v in pairs(candidate_intermediates) do
             if data.raw.item[v] then
                 rm.AddIngredient("space-science-pack", v, 1)
+                rm.AddIngredient("space-science-pack-muluna", v, 1)
             end
         end
 
@@ -129,8 +135,10 @@ if misc.difficulty == 3 then
         tm.AddSciencePack("plastic-bar-productivity", "space-science-pack")
         tm.AddSciencePack("explosives-productivity", "space-science-pack")
         tm.AddSciencePack("scrap-recycling-productivity", "space-science-pack")
+        tm.AddSciencePack("bioculture-productivity", "space-science-pack")
     else
         rm.RemoveProduct("space-science-pack", "space-science-pack", 3)
+        rm.RemoveProduct("space-science-pack-muluna", "space-science-pack", 3)
     end
 end
 
@@ -212,6 +220,14 @@ if mods["maraxsis"] then
     if settings.startup["planetfall-postgame-logistics"].value then
         tm.AddSciencePack("superposition-transport-belt", "hydraulic-science-pack")
         tm.AddSciencePack("extradimensional-cargo-space", "hydraulic-science-pack")
+    end
+end
+
+if mods["planet-muluna"] then
+    tm.AddSciencePack("full-spectrum-magmallurgy", "interstellar-science-pack")
+    if settings.startup["planetfall-postgame-logistics"].value then
+        tm.AddSciencePack("superposition-transport-belt", "interstellar-science-pack")
+        tm.AddSciencePack("extradimensional-cargo-space", "interstellar-science-pack")
     end
 end
 

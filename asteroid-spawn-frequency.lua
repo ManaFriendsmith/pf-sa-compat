@@ -8,6 +8,10 @@ local asteroid_spawn_rates = {
         tenebris=0.03,
         aquilo=0.03,
         maraxsis=0.05,
+        castra=0.06,
+        paracelsin=0.1,
+        muluna=0.04,
+        cerys=0.1,
         ["solar-system-edge"]=0.02
     },
     ["medium-brass-asteroid"] = {
@@ -16,10 +20,13 @@ local asteroid_spawn_rates = {
         gleba=0.02,
         terrapalus=0.02,
         tenebris=0.05,
+        castra=0.09,
+        cerys=0.12,
     },
     ["big-brass-asteroid"] = {
         aquilo = 0.06,
-        maraxsis = 0.1
+        maraxsis = 0.1,
+        paracelsin = 0.1
     },
     ["huge-brass-asteroid"] = {
         ["solar-system-edge"]=0.09,
@@ -34,6 +41,10 @@ local asteroid_spawn_rates = {
         tenebris=0.4,
         aquilo=0.01,
         maraxsis=0.25,
+        castra=0.01,
+        paracelsin=0.01,
+        muluna=0.2,
+        cerys=0.1,
         ["solar-system-edge"]=0.01
     },
     ["medium-panspermia-asteroid"] = {
@@ -41,11 +52,15 @@ local asteroid_spawn_rates = {
         fulgora=0.03,
         gleba=0.4,
         terrapalus=0.7,
-        tenebris=0.4
+        tenebris=0.4,
+        castra=0.01,
+        muluna=0.2,
+        cerys=0.03
     },
     ["big-panspermia-asteroid"] = {
         aquilo = 0.1,
-        maraxsis = 0.1
+        maraxsis = 0.1,
+        paracelsin = 0.1
     },
     ["huge-panspermia-asteroid"] = {
         ["solar-system-edge"]=0.05,
