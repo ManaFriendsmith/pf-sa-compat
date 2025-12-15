@@ -54,7 +54,6 @@ local asteroid_spawn_rates = {
         terrapalus=0.7,
         tenebris=0.4,
         castra=0.01,
-        muluna=0.2,
         cerys=0.03
     },
     ["big-panspermia-asteroid"] = {
