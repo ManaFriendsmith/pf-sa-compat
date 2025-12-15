@@ -12,7 +12,7 @@ Specifically:
 
 ## But what if I want to use it without your other mods? ##
 
-"Difficulty" here refers to the difficulty setting in pf-functions, which is a dependency. It can be either Minimal, Moderate, or Maximal.
+Uh, okay, sure I guess. It's dependent on pf-functions, which includes a difficulty selection of Minimal, Moderate, and Maximal.
 
 # Rocket control units #
 
@@ -21,6 +21,12 @@ On Moderate and Maximal difficulty, rocket parts and a few space-related buildin
 There's already a mod for this, but I didn't know about it when I started this project.
 
 When playing with Lunar Landings, that mod's Rocket Control Units used for launching to and from Luna are renamed to Lunar Navigation Units and given a distinct icon.
+
+# Space science nerf #
+
+On Maximal difficulty, space science is less productive so you may want to look into scaling it earlier. It's also needed for all productivity researches.
+
+With most More Materials mods, space science will require additional ingredients. This will require imports from the ground or, once advanced asteroid processing is unlocked, a more complex setup for self-sufficiency.
 
 # Module tweaks #
 
