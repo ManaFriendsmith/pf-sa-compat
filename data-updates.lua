@@ -62,6 +62,16 @@ table.insert(data.raw["simple-entity"]["fulgoran-ruin-vault"].minable.results, {
 table.insert(data.raw["simple-entity"]["fulgoran-ruin-vault"].minable.results, {type="item", name="accumulator", amount=4})
 table.insert(data.raw["simple-entity"]["fulgoran-ruin-vault"].minable.results, {type="item", name="medium-electric-pole", amount=6})
 
+if mods["Cerys-Moon-of-Fulgora"] then
+    table.insert(data.raw["simple-entity"]["cerys-ruin-huge"].minable.results, {type="item", name="recycler", amount=1, probability=0.25})
+    table.insert(data.raw["simple-entity"]["cerys-ruin-huge"].minable.results, {type="item", name="accumulator", amount=1})
+    table.insert(data.raw["simple-entity"]["cerys-ruin-huge"].minable.results, {type="item", name="medium-electric-pole", amount=1})
+
+    table.insert(data.raw["simple-entity"]["cerys-ruin-colossal"].minable.results, {type="item", name="recycler", amount=1})
+    table.insert(data.raw["simple-entity"]["cerys-ruin-colossal"].minable.results, {type="item", name="accumulator", amount_min=1, amount_max=2})
+    table.insert(data.raw["simple-entity"]["cerys-ruin-colossal"].minable.results, {type="item", name="medium-electric-pole", amount_min=1, amount_max=3})
+end
+
 if mods["IfNickelMk2"] and mods["BrassTacksMk2"] then
     rm.RemoveProduct("advanced-metallic-asteroid-crushing", "copper-ore", 4)
 
@@ -120,10 +130,12 @@ if misc.difficulty == 3 then
         rm.RemoveProduct("space-science-pack-muluna", "space-science-pack", 1)
         rm.MultiplyRecipe("space-science-pack", multiplier)
         rm.MultiplyRecipe("space-science-pack-muluna", multiplier)
+        rm.MultiplyRecipe("cerys-space-science-pack-from-methane-ice", multiplier)
         for k, v in pairs(candidate_intermediates) do
             if data.raw.item[v] then
                 rm.AddIngredient("space-science-pack", v, 1)
                 rm.AddIngredient("space-science-pack-muluna", v, 1)
+                rm.AddIngredient("cerys-space-science-pack-from-methane-ice", v, 1)
             end
         end
 
@@ -196,38 +208,6 @@ if data.raw.item["quantum-encabulator"] then
     if mods["castra"] then
         rm.RemoveIngredient("promethium-science-pack", "lithium-battery")
         rm.AddIngredient("quantum-encabulator", "lithium-battery", 5)
-    end
-end
-
-if mods["Paracelsin"] then
-    tm.AddSciencePack("full-spectrum-magmallurgy", "galvanization-science-pack")
-    if settings.startup["planetfall-postgame-logistics"].value then
-        tm.AddSciencePack("superposition-transport-belt", "galvanization-science-pack")
-        tm.AddSciencePack("extradimensional-cargo-space", "galvanization-science-pack")
-    end
-end
-
-if mods["castra"] then
-    tm.AddSciencePack("full-spectrum-magmallurgy", "battlefield-science-pack")
-    if settings.startup["planetfall-postgame-logistics"].value then
-        tm.AddSciencePack("superposition-transport-belt", "battlefield-science-pack")
-        tm.AddSciencePack("extradimensional-cargo-space", "battlefield-science-pack")
-    end
-end
-
-if mods["maraxsis"] then
-    tm.AddSciencePack("full-spectrum-magmallurgy", "hydraulic-science-pack")
-    if settings.startup["planetfall-postgame-logistics"].value then
-        tm.AddSciencePack("superposition-transport-belt", "hydraulic-science-pack")
-        tm.AddSciencePack("extradimensional-cargo-space", "hydraulic-science-pack")
-    end
-end
-
-if mods["planet-muluna"] then
-    tm.AddSciencePack("full-spectrum-magmallurgy", "interstellar-science-pack")
-    if settings.startup["planetfall-postgame-logistics"].value then
-        tm.AddSciencePack("superposition-transport-belt", "interstellar-science-pack")
-        tm.AddSciencePack("extradimensional-cargo-space", "interstellar-science-pack")
     end
 end
 
@@ -306,6 +286,7 @@ if misc.difficulty > 1 then
     data.raw.module["quality-module-3"].default_import_location = "fulgora"
 
     if misc.difficulty == 3 then
+
         data.raw.module["productivity-module-3"].default_import_location = "aquilo"
         data.raw.recipe["productivity-module-3"].surface_conditions = {
             {
@@ -345,28 +326,20 @@ if misc.difficulty > 1 then
             rm.AddIngredient("fusion-generator", "quality-module-3")
         end
 
-        if mods["Paracelsin"] then
-            tm.AddSciencePack("productivity-module-3", "galvanization-science-pack")
-        end
+        tm.AddSciencePacks("productivity-module-3", tm.post_aquilo_sciences)
 
         if mods["LunarLandings"] then
-            tm.AddPrerequisite("ll-quantum-module", "promethium-science-pack")
-            tm.AddSciencePack("ll-quantum-module", "military-science-pack")
-            tm.AddSciencePack("ll-quantum-module", "space-science-pack")
-            tm.AddSciencePack("ll-quantum-module", "metallurgic-science-pack")
-            tm.AddSciencePack("ll-quantum-module", "electromagnetic-science-pack")
-            tm.AddSciencePack("ll-quantum-module", "agricultural-science-pack")
-            tm.AddSciencePack("ll-quantum-module", "cryogenic-science-pack")
-            tm.AddSciencePack("ll-quantum-module", "promethium-science-pack")
-            if mods["Paracelsin"] then
-                tm.AddSciencePack("ll-quantum-module", "galvanization-science-pack")
-            end
-            if mods["castra"] then
-                tm.AddSciencePack("ll-quantum-module", "battlefield-science-pack")
-            end
-            if mods["maraxsis"] then
-                tm.AddSciencePack("ll-quantum-module", "hydraulic-science-pack")
-            end
+            tm.AddSciencePacks("ll-quantum-module", tm.post_promethium_sciences)
+        end
+
+        if mods["Cerys-Moon-of-Fulgora"] then
+            rm.ReplaceIngredientProportional("cerys-radioactive-module-charged", "productivity-module-2", "productivity-module-3", 0.25)
+            tm.AddSciencePack("cerys-radioactive-module", "cryogenic-science-pack")
+            tm.AddPrerequisite("cerys-radioactive-module", "cryogenic-science-pack")
+            tm.AddPrerequisite("cerys-radioactive-module", "planetslib-cerys-cargo-drops")
+
+            rm.RemoveProduct("cerys-radioactive-module-decayed-recycling", "productivity-module-2", 2)
+            rm.AddProduct("cerys-radioactive-module-decayed-recycling", {type="item", name="productivity-module-3", amount=0, extra_count_fraction=0.5})
         end
     else
         data.raw.recipe["productivity-module-3"].surface_conditions = {
