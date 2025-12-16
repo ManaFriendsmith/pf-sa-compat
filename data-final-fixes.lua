@@ -35,3 +35,5 @@ for k, v in pairs(asteroid_reprocessing) do
     end
     data.raw.recipe[k].results = table.deepcopy(result_list)
 end
+
+require("research-upgrade-tiering")
