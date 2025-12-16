@@ -84,6 +84,8 @@ if mods["BrassTacksMk2"] or mods["IfNickelMk2"] or mods["ThemTharHillsMk2"] then
             }
         }
     })
+
+    tm.AddSciencePacks("full-spectrum-magmallurgy", tm.post_promethium_sciences)
 end
 
 if mods["BrassTacksMk2"] or mods["IfNickelMk2"] then
@@ -1028,4 +1030,7 @@ if settings.startup["planetfall-postgame-logistics"].value then
         rm.AddIngredient("extradimensional-cargo-wagon", "spurving-bearing", 20)
         rm.AddIngredient("extradimensional-fluid-wagon", "non-reversible-tremie-pipe", 20)
     end
+
+    tm.AddSciencePacks("extradimensional-cargo-space", tm.post_promethium_sciences)
+    tm.AddSciencePacks("superposition-transport-belt", tm.post_promethium_sciences)
 end
