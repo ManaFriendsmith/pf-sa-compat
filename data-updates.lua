@@ -148,6 +148,8 @@ if misc.difficulty == 3 then
         tm.AddSciencePack("explosives-productivity", "space-science-pack")
         tm.AddSciencePack("scrap-recycling-productivity", "space-science-pack")
         tm.AddSciencePack("bioculture-productivity", "space-science-pack")
+        tm.AddSciencePack("rocket-part-productivity", "space-science-pack")
+        tm.AddSciencePack("gimbaled-rocket-engine-productivity", "space-science-pack")
     else
         rm.RemoveProduct("space-science-pack", "space-science-pack", 3)
         rm.RemoveProduct("space-science-pack-muluna", "space-science-pack", 3)
