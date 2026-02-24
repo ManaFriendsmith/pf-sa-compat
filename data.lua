@@ -1007,6 +1007,9 @@ if settings.startup["planetfall-postgame-logistics"].value then
 
     data.raw["utility-constants"].default.max_belt_stack_size = math.max(data.raw["utility-constants"].default.max_belt_stack_size, 6)
     data.raw.inserter["stack-inserter"].max_belt_stack_size = math.max(data.raw.inserter["stack-inserter"].max_belt_stack_size, 6)
+    if mods["long_stack_inserter"] then
+        data.raw.inserter["long-stack-inserter"].max_belt_stack_size = math.max(data.raw.inserter["long-stack-inserter"].max_belt_stack_size, 6)
+    end
 
     if data.raw.item["quantum-encabulator"] then
         rm.MultiplyRecipe("superposition-transport-belt", 5)
