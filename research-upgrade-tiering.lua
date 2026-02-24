@@ -63,7 +63,7 @@ if misc.difficulty > 1 then
             tm.AddPrerequisite(mp6, "ll-quantum-science-pack")
         end
         data:extend({mp6})
-        mp7 = snip_research_path(mp6, 60)
+        mp7 = snip_research_path(mp6, 50)
     else
         mp7 = snip_research_path(mp5, 40)
     end
@@ -198,7 +198,7 @@ if misc.difficulty > 1 then
     tm.AddSciencePacks(sr4, tm.post_promethium_sciences)
     tm.AddPrerequisite(sr4, "promethium-science-pack")
     sr4.max_level = 30
-    data:extend({pb1, pb2, pb3, pb4})
+    data:extend({sr1, sr2, sr3, sr4})
     base_tech_name = false
 
     local ap1 = snip_research_path("asteroid-productivity", 5)
@@ -226,7 +226,158 @@ if misc.difficulty > 1 then
     tm.AddPrerequisite(rp1, "promethium-science-pack")
     tm.AddSciencePacks(rp1, tm.post_promethium_sciences)
     data:extend({rp1})
-    sr4.max_level = 20
+    rp1.max_level = 30
+    
+    base_tech_name = "worker-robots-speed"
+    local rs1 = snip_research_path("worker-robots-speed-7", 15)
+    tm.AddPrerequisite(rs1, "cryogenic-science-pack")
+    tm.AddSciencePacks(rp1, tm.post_aquilo_sciences)
+    local rs2 = snip_research_path(rs1, 25)
+    tm.AddPrerequisite(rs2, "promethium-science-pack")
+    tm.AddSciencePacks(rs2, tm.post_promethium_sciences)
+    data:extend({rs1, rs2})
+
+    base_tech_name = "physical-projectile-damage"
+    local phys1 = snip_research_path("physical-projectile-damage-7", 10)
+    tm.AddSciencePack(phys1, "metallurgic-science-pack")
+    tm.AddPrerequisite(phys1, "metallurgic-science-pack")
+    local phys2 = snip_research_path(phys1, 15)
+    tm.AddSciencePack(phys2, "agricultural-science-pack")
+    tm.AddPrerequisite(phys2, "agricultural-science-pack")
+    if mods["castra"] then
+        tm.AddSciencePack(phys2, "battlefield-science-pack")
+        tm.AddPrerequisite(phys2, "battlefield-science-pack")
+    end
+    local phys3 = snip_research_path(phys2, 20)
+    tm.AddSciencePack(phys3, "electromagnetic-science-pack")
+    tm.AddPrerequisite(phys3, "electromagnetic-science-pack")
+    if mods["planet-muluna"] then
+        tm.AddSciencePack(phys3, "interstellar-science-pack")
+        tm.AddPrerequisite(phys3, "interstellar-science-pack")
+    end
+    local phys4 = snip_research_path(phys3, 25)
+    tm.AddSciencePacks(phys4, tm.post_aquilo_sciences)
+    tm.AddPrerequisite(phys4, "cryogenic-science-pack")
+    if mods["Paracelsin"] then
+        tm.AddSciencePack(phys4, "galvanization-science-pack")
+        tm.AddPrerequisite(phys4, "galvanization-science-pack")
+    end
+    local phys5 = snip_research_path(phys4, 30)
+    tm.AddSciencePacks(phys5, tm.post_promethium_sciences)
+    tm.AddPrerequisite(phys5, "promethium-science-pack")
+    data:extend({phys1, phys2, phys3, phys4, phys5})
+
+    base_tech_name = "laser-weapons-damage"
+    local las1 = snip_research_path("laser-weapons-damage-7", 10)
+    tm.AddSciencePack(las1, "electromagnetic-science-pack")
+    tm.AddPrerequisite(las1, "electromagnetic-science-pack")
+    local las2 = snip_research_path(las1, 15)
+    tm.AddSciencePack(las2, "agricultural-science-pack")
+    tm.AddPrerequisite(las2, "agricultural-science-pack")
+    if mods["castra"] then
+        tm.AddSciencePack(las2, "battlefield-science-pack")
+        tm.AddPrerequisite(las2, "battlefield-science-pack")
+    end
+    local las3 = snip_research_path(las2, 20)
+    tm.AddSciencePack(las3, "metallurgic-science-pack")
+    tm.AddPrerequisite(las3, "metallurgic-science-pack")
+    if mods["planet-muluna"] then
+        tm.AddSciencePack(las3, "interstellar-science-pack")
+        tm.AddPrerequisite(las3, "interstellar-science-pack")
+    end
+    local las4 = snip_research_path(las3, 25)
+    tm.AddSciencePacks(las4, tm.post_aquilo_sciences)
+    tm.AddPrerequisite(las4, "cryogenic-science-pack")
+    if mods["Paracelsin"] then
+        tm.AddSciencePack(las4, "galvanization-science-pack")
+        tm.AddPrerequisite(las4, "galvanization-science-pack")
+    end
+    local las5 = snip_research_path(las4, 30)
+    tm.AddSciencePacks(las5, tm.post_promethium_sciences)
+    tm.AddPrerequisite(las5, "promethium-science-pack")
+    data:extend({las1, las2, las3, las4, las5})
+
+    base_tech_name = "stronger-explosives"
+    local exp2 = snip_research_path("stronger-explosives-7", 15)
+    tm.AddSciencePack(exp2, "electromagnetic-science-pack")
+    tm.AddPrerequisite(exp2, "electromagnetic-science-pack")
+    if mods["castra"] then
+        tm.AddSciencePack(exp2, "battlefield-science-pack")
+        tm.AddPrerequisite(exp2, "battlefield-science-pack")
+    end
+    local exp3 = snip_research_path(exp2, 20)
+    tm.AddSciencePack(exp3, "metallurgic-science-pack")
+    tm.AddPrerequisite(exp3, "metallurgic-science-pack")
+    if mods["planet-muluna"] then
+        tm.AddSciencePack(exp3, "interstellar-science-pack")
+        tm.AddPrerequisite(exp3, "interstellar-science-pack")
+    end
+    local exp4 = snip_research_path(exp3, 25)
+    tm.AddSciencePacks(exp4, tm.post_aquilo_sciences)
+    tm.AddPrerequisite(exp4, "cryogenic-science-pack")
+    if mods["Paracelsin"] then
+        tm.AddSciencePack(exp4, "galvanization-science-pack")
+        tm.AddPrerequisite(exp4, "galvanization-science-pack")
+    end
+    local exp5 = snip_research_path(exp4, 30)
+    tm.AddSciencePacks(exp5, tm.post_promethium_sciences)
+    tm.AddPrerequisite(exp5, "promethium-science-pack")
+    data:extend({exp2, exp3, exp4, exp5})
+
+    base_tech_name = "refined-flammables"
+    local flam2 = snip_research_path("refined-flammables-7", 15)
+    tm.AddSciencePack(flam2, "metallurgic-science-pack")
+    tm.AddPrerequisite(flam2, "metallurgic-science-pack")
+    if mods["castra"] then
+        tm.AddSciencePack(flam2, "battlefield-science-pack")
+        tm.AddPrerequisite(flam2, "battlefield-science-pack")
+    end
+    local flam3 = snip_research_path(flam2, 20)
+    tm.AddSciencePack(flam3, "electromagnetic-science-pack")
+    tm.AddPrerequisite(flam3, "electromagnetic-science-pack")
+    if mods["planet-muluna"] then
+        tm.AddSciencePack(flam3, "interstellar-science-pack")
+        tm.AddPrerequisite(flam3, "interstellar-science-pack")
+    end
+    local flam4 = snip_research_path(flam3, 25)
+    tm.AddSciencePacks(flam4, tm.post_aquilo_sciences)
+    tm.AddPrerequisite(flam4, "cryogenic-science-pack")
+    if mods["maraxsis"] then
+        tm.AddSciencePack(flam4, "hydraulic-science-pack")
+        tm.AddPrerequisite(flam4, "hydraulic-science-pack")
+    end
+    local flam5 = snip_research_path(flam4, 30)
+    tm.AddSciencePacks(flam5, tm.post_promethium_sciences)
+    tm.AddPrerequisite(flam5, "promethium-science-pack")
+    data:extend({flam2, flam3, flam4, flam5})
+
+    base_tech_name = "electric-weapons-damage"
+    local ele2 = snip_research_path("electric-weapons-damage-4", 10)
+    tm.AddSciencePack(ele2, "metallurgic-science-pack")
+    tm.AddPrerequisite(ele2, "metallurgic-science-pack")
+    if mods["castra"] then
+        tm.AddSciencePack(ele2, "battlefield-science-pack")
+        tm.AddPrerequisite(ele2, "battlefield-science-pack")
+    end
+    local ele3 = snip_research_path(ele2, 15)
+    tm.AddSciencePack(ele3, "agricultural-science-pack")
+    tm.AddPrerequisite(ele3, "agricultural-science-pack")
+    if mods["planet-muluna"] then
+        tm.AddSciencePack(ele3, "interstellar-science-pack")
+        tm.AddPrerequisite(ele3, "interstellar-science-pack")
+    end
+    local ele4 = snip_research_path(ele3, 20)
+    tm.AddSciencePacks(ele4, tm.post_aquilo_sciences)
+    tm.AddPrerequisite(ele4, "cryogenic-science-pack")
+    if mods["Paracelsin"] then
+        tm.AddSciencePack(ele4, "galvanization-science-pack")
+        tm.AddPrerequisite(ele4, "galvanization-science-pack")
+    end
+    local ele5 = snip_research_path(ele4, 25)
+    tm.AddSciencePacks(ele5, tm.post_promethium_sciences)
+    tm.AddPrerequisite(ele5, "promethium-science-pack")
+    data:extend({ele2, ele3, ele4, ele5})
+
     base_tech_name = false
 
     if data.raw.technology["explosives-productivity"] then
@@ -335,5 +486,17 @@ if misc.difficulty > 1 then
         base_tech_name = false
     end
 
+    if data.raw.technology["helium-productivity"] then
+        local h1 = snip_research_path("helium-productivity", 10)
+        tm.AddSciencePacks(h1, tm.post_aquilo_sciences)
+        tm.AddSciencePack(h1, "utility-science-pack")
+        tm.AddPrerequisite(h1, "cryogenic-science-pack")
+        local h2 = snip_research_path(h1, 20)
+        tm.AddPrerequisite(h2, "promethium-science-pack")
+        tm.AddSciencePacks(h2, tm.post_promethium_sciences)
+        h2.max_level = 30
+        data:extend({h1, h2})
+        base_tech_name = false
+    end
 
 end
