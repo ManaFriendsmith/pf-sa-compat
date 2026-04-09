@@ -431,4 +431,8 @@ if mods["quality"] and misc.last_pf_mod == "pf-sa-compat" then
     if mods["Age-of-Production"] then
         data.raw.furnace["aop-salvager"].result_inventory_size = biggest_result_list
     end
+
+    rm.SortScrapProducts("scrap-recycling")
+    rm.SortScrapProducts("cerys-nuclear-scrap-recycling")
+    rm.SortScrapProducts("ancient-military-wreckage-recycling")
 end
