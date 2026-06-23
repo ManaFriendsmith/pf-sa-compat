@@ -2,7 +2,7 @@ local tm = require("__pf-functions__/technology-manipulation")
 local misc = require("__pf-functions__/misc")
 
 
-if misc.difficulty > 1 then
+if settings.startup["planetfall-research-tiering"].value then
     local base_tech_name = "mining-productivity"
 
 
@@ -96,66 +96,66 @@ if misc.difficulty > 1 then
     data:extend({steel1, steel2, steel3, steel4})
     base_tech_name = false
 
-    local lds1 = snip_research_path("low-density-structure-productivity", 5)
+    local lds1 = snip_research_path("low-density-structure-productivity", mods["tuner-upper"] and 2 or 5)
     tm.AddSciencePack(lds1, "agricultural-science-pack")
     tm.AddSciencePack(lds1, "space-science-pack")
     tm.AddPrerequisite(lds1, "agricultural-science-pack")
-    local lds2 = snip_research_path(lds1, 10)
+    local lds2 = snip_research_path(lds1, mods["tuner-upper"] and 4 or 10)
     tm.AddSciencePack(lds2, "electromagnetic-science-pack")
     tm.AddPrerequisite(lds2, "electromagnetic-science-pack")
-    local lds3 = snip_research_path(lds2, 15)
+    local lds3 = snip_research_path(lds2, mods["tuner-upper"] and 6 or 15)
     tm.AddSciencePacks(lds3, tm.post_aquilo_sciences)
     tm.AddPrerequisite(lds3, "cryogenic-science-pack")
     if mods["Paracelsin"] then
         tm.AddSciencePack(lds3, "galvanization-science-pack")
         tm.AddPrerequisite(lds3, "galvanization-science-pack")
     end
-    local lds4 = snip_research_path(lds3, 20)
+    local lds4 = snip_research_path(lds3, mods["tuner-upper"] and 8 or 20)
     tm.AddSciencePacks(lds4, tm.post_promethium_sciences)
     tm.AddPrerequisite(lds4, "promethium-science-pack")
-    lds4.max_level = 30
+    lds4.max_level = mods["tuner-upper"] and 10 or 30
     data:extend({lds1, lds2, lds3, lds4})
     base_tech_name = false
 
-    local pu1 = snip_research_path("processing-unit-productivity", 5)
+    local pu1 = snip_research_path("processing-unit-productivity", mods["tuner-upper"] and 2 or 5)
     tm.AddSciencePack(pu1, "metallurgic-science-pack")
     tm.AddSciencePack(pu1, "space-science-pack")
     tm.AddPrerequisite(pu1, "metallurgic-science-pack")
-    local pu2 = snip_research_path(pu1, 10)
+    local pu2 = snip_research_path(pu1, mods["tuner-upper"] and 4 or 10)
     tm.AddSciencePack(pu2, "agricultural-science-pack")
     tm.AddPrerequisite(pu2, "agricultural-science-pack")
-    local pu3 = snip_research_path(pu2, 15)
+    local pu3 = snip_research_path(pu2, mods["tuner-upper"] and 6 or 15)
     tm.AddSciencePacks(pu3, tm.post_aquilo_sciences)
     tm.AddPrerequisite(pu3, "cryogenic-science-pack")
     if mods["castra"] then
         tm.AddSciencePack(pu3, "battlefield-science-pack")
         tm.AddPrerequisite(pu3, "battlefield-science-pack")
     end
-    local pu4 = snip_research_path(pu3, 20)
+    local pu4 = snip_research_path(pu3, mods["tuner-upper"] and 8 or 20)
     tm.AddSciencePacks(pu4, tm.post_promethium_sciences)
     tm.AddPrerequisite(pu4, "promethium-science-pack")
-    pu4.max_level = 30
+    pu4.max_level = mods["tuner-upper"] and 10 or 30
     data:extend({pu1, pu2, pu3, pu4})
     base_tech_name = false
 
-    local rf1 = snip_research_path("rocket-fuel-productivity", 5)
+    local rf1 = snip_research_path("rocket-fuel-productivity", mods["tuner-upper"] and 2 or 5)
     tm.AddSciencePack(rf1, "electromagnetic-science-pack")
     tm.AddSciencePack(rf1, "space-science-pack")
     tm.AddPrerequisite(rf1, "electromagnetic-science-pack")
-    local rf2 = snip_research_path(rf1, 10)
+    local rf2 = snip_research_path(rf1, mods["tuner-upper"] and 4 or 10)
     tm.AddSciencePack(rf2, "metallurgic-science-pack")
     tm.AddPrerequisite(rf2, "metallurgic-science-pack")
-    local rf3 = snip_research_path(rf2, 15)
+    local rf3 = snip_research_path(rf2, mods["tuner-upper"] and 6 or 15)
     tm.AddSciencePacks(rf3, tm.post_aquilo_sciences)
     tm.AddPrerequisite(rf3, "cryogenic-science-pack")
     if mods["maraxsis"] then
         tm.AddSciencePack(rf3, "hydraulic-science-pack")
         tm.AddPrerequisite(rf3, "hydraulic-science-pack")
     end
-    local rf4 = snip_research_path(rf3, 20)
+    local rf4 = snip_research_path(rf3, mods["tuner-upper"] and 8 or 20)
     tm.AddSciencePacks(rf4, tm.post_promethium_sciences)
     tm.AddPrerequisite(rf4, "promethium-science-pack")
-    rf4.max_level = 30
+    rf4.max_level = mods["tuner-upper"] and 10 or 30
     data:extend({rf1, rf2, rf3, rf4})
     base_tech_name = false
 

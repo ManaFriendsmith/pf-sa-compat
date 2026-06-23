@@ -12,5 +12,12 @@ data:extend({
       setting_type = "startup",
       default_value = true,
       order = "b"
+    },
+    {
+      type = "bool-setting",
+      name = "planetfall-research-tiering",
+      setting_type = "startup",
+      default_value = true,
+      order = "b"
     }
   })

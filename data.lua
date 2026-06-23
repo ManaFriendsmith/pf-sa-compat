@@ -33,7 +33,7 @@ if misc.difficulty > 1 then
         {
             type = "recipe",
             name = "rocket-control-unit",
-            category = "electronics",
+            categories={"crafting", "electromagnetics"},
             ingredients = {
                 {type="item", name="processing-unit", amount=1},
                 {type="item", name="battery", amount=3},
@@ -102,7 +102,7 @@ if mods["BrassTacksMk2"] or mods["IfNickelMk2"] then
                 localised_name = {"recipe-name.recycling", {"item-name.iron-plate"}},
                 icons = {
                         {
-                            icon = "__quality__/graphics/icons/recycling.png",
+                            icon = "__recycler__/graphics/icons/recycling.png",
                             icon_size = 64
                         },
                         {
@@ -111,16 +111,16 @@ if mods["BrassTacksMk2"] or mods["IfNickelMk2"] then
                             scale = 0.33
                         },
                         {
-                            icon = "__quality__/graphics/icons/recycling-top.png",
+                            icon = "__recycler__/graphics/icons/recycling-top.png",
                             icon_size = 64
                         }
                 },
-                category = "recycling",
+                categories={"recycling"},
                 ingredients = {
                     {type="item", name="iron-plate", amount=1}
                 },
                 results = {
-                    {type="item", name="iron-ore", amount=1, probability = 0.06}
+                    {type="item", name="iron-ore", amount=1, independent_probability = 0.06}
                 },
                 bespoke = "iron-plate",
                 energy_required = 3.2/16,
@@ -136,7 +136,7 @@ if mods["BrassTacksMk2"] or mods["IfNickelMk2"] then
                 localised_name = {"recipe-name.recycling", {"item-name.copper-plate"}},
                 icons = {
                         {
-                            icon = "__quality__/graphics/icons/recycling.png",
+                            icon = "__recycler__/graphics/icons/recycling.png",
                             icon_size = 64
                         },
                         {
@@ -145,16 +145,16 @@ if mods["BrassTacksMk2"] or mods["IfNickelMk2"] then
                             scale = 0.33
                         },
                         {
-                            icon = "__quality__/graphics/icons/recycling-top.png",
+                            icon = "__recycler__/graphics/icons/recycling-top.png",
                             icon_size = 64
                         }
                 },
-                category = "recycling",
+                categories={"recycling"},
                 ingredients = {
                     {type="item", name="copper-plate", amount=1}
                 },
                 results = {
-                    {type="item", name="copper-ore", amount=1, probability = 0.06}
+                    {type="item", name="copper-ore", amount=1, independent_probability = 0.06}
                 },
                 bespoke = "copper-plate",
                 energy_required = 3.2/16,
@@ -170,7 +170,7 @@ if mods["BrassTacksMk2"] or mods["IfNickelMk2"] then
                 localised_name = {"recipe-name.recycling", {"item-name.steel-plate"}},
                 icons = {
                         {
-                            icon = "__quality__/graphics/icons/recycling.png",
+                            icon = "__recycler__/graphics/icons/recycling.png",
                             icon_size = 64
                         },
                         {
@@ -179,16 +179,16 @@ if mods["BrassTacksMk2"] or mods["IfNickelMk2"] then
                             scale = 0.33
                         },
                         {
-                            icon = "__quality__/graphics/icons/recycling-top.png",
+                            icon = "__recycler__/graphics/icons/recycling-top.png",
                             icon_size = 64
                         }
                 },
-                category = "recycling",
+                categories={"recycling"},
                 ingredients = {
                     {type="item", name="steel-plate", amount=1}
                 },
                 results = {
-                    {type="item", name="iron-ore", amount=1, probability = 0.18}
+                    {type="item", name="iron-ore", amount=1, independent_probability = 0.18}
                 },
                 bespoke = "steel-plate",
                 energy_required = 1,
@@ -236,14 +236,14 @@ if mods["BrassTacksMk2"] or mods["IfNickelMk2"] then
             },
             subgroup = "agriculture-processes",
             order = "b[agriculture]-bb",
-            category = mods["Age-of-Production"] and "biochemistry-or-organic" or "organic",
+            categories = {"organic"},
             ingredients = {
                 {type="item", name="iron-bacteria", amount=1, ignored_by_stats=1},
                 {type="item", name="nutrients", amount=1},
             },
             results = {
                 {type="item", name="philosophers-hormone", amount=1},
-                {type="item", name=misc.difficulty == 3 and "copper-bacteria" or "iron-bacteria", amount=1, probability=0.15, ignored_by_stats=1}
+                {type="item", name=misc.difficulty == 3 and "copper-bacteria" or "iron-bacteria", amount=1, independent_probability=0.15, ignored_by_stats=1}
             },
             auto_recycle = false,
             energy_required = 1,
@@ -275,14 +275,14 @@ if mods["BrassTacksMk2"] or mods["IfNickelMk2"] then
             },
             subgroup = "agriculture-processes",
             order = "b[agriculture]-bb",
-            category = mods["Age-of-Production"] and "biochemistry-or-organic" or "organic",
+            categories = {"organic"},
             ingredients = {
                 {type="item", name="copper-bacteria", amount=1, ignored_by_stats=1},
                 {type="item", name="nutrients", amount=1},
             },
             results = {
                 {type="item", name="philosophers-hormone", amount=1},
-                {type="item", name=misc.difficulty == 3 and "iron-bacteria" or "copper-bacteria", amount=1, probability=0.15, ignored_by_stats=1}
+                {type="item", name=misc.difficulty == 3 and "iron-bacteria" or "copper-bacteria", amount=1, independent_probability=0.15, ignored_by_stats=1}
             },
             auto_recycle = false,
             energy_required = 1,
@@ -364,30 +364,6 @@ if mods["BrassTacksMk2"] or mods["IfNickelMk2"] then
     end
 end
 
-if misc.difficulty > 1 then
-    data:extend({
-        {
-            type = "recipe-category",
-            name = "electronics-or-organic",
-            can_recycle = true
-        },
-        {
-            type = "recipe-category",
-            name = "electronics-or-metallurgy",
-            can_recycle = true
-        }
-    })
-    if misc.difficulty == 3 then
-        data:extend({
-            {
-                type = "recipe-category",
-                name = "electronics-or-cryogenics",
-                can_recycle = true
-            }    
-        })
-    end
-end
-
 if misc.difficulty == 3 and mods["BrassTacksMk2"] and mods["IfNickelMk2"] and mods["ThemTharHillsMk2"] and mods["BrimStuffMk2"] and mods["LasingAroundMk2"] then
     data:extend({
         {
@@ -407,7 +383,7 @@ if misc.difficulty == 3 and mods["BrassTacksMk2"] and mods["IfNickelMk2"] and mo
         {
             type = "recipe",
             name = "quantum-encabulator",
-            category = "cryogenics",
+            categories={"cryogenics"},
             surface_conditions = {
                 {
                     property = "gravity",
@@ -449,7 +425,7 @@ end
 
 if tune_up_data then
     tune_up_data.recipes["quantum-encabulator"] = {
-        category = "tuning-up",
+        categories={"tuning-up"},
         count = 1,
         energy_required = 5,
         surface_conditions = {{property = "gravity", max = 0}},
@@ -457,14 +433,14 @@ if tune_up_data then
     }
 
     tune_up_data.recipes["philosophers-hormone"] = {
-        category = "purification",
+        categories={"purification"},
         count = 4,
         energy_required = 2,
         ingredients = {{{"bioflux", 1}}}
     }
 
     tune_up_data.recipes["rocket-control-unit"] = {
-        category = "tuning-up",
+        categories={"tuning-up"},
         count = 2,
         energy_required = 20,
         ingredients = {{{"supercapacitor", 1}, {"tracker", 1}}, {{"supercapacitor", 1}, {"processing-unit", 1}}}
@@ -627,6 +603,23 @@ if settings.startup["planetfall-postgame-logistics"].value then
         icon_size = 64,
         tint = {r=0.7,g=0.8,b=1}
     }}
+    local function recursively_set_tint(g)
+        if not g.tint then
+            g.tint = {r=0.5,g=0.75,b=1}
+            for k, v in pairs(g) do
+                if k ~= "tint" and k ~= "shift" and type(v) == "table" then
+                    recursively_set_tint(v)
+                end
+            end
+        end
+    end
+    if new_cargo_bay.graphics_set then
+        --recursively_set_tint(new_cargo_bay.graphics_set)
+    end
+    if new_cargo_bay.platform_graphics_set then
+        --recursively_set_tint(new_cargo_bay.platform_graphics_set)
+    end
+    --[[
     for k, v in pairs(new_cargo_bay.graphics_set.connections) do
         for k2, v2 in pairs(v) do
             for k3, v3 in pairs(v2) do
@@ -667,6 +660,7 @@ if settings.startup["planetfall-postgame-logistics"].value then
             end
         end
     end
+    ]]--
     local new_cargo_bay_item = table.deepcopy(data.raw.item["cargo-bay"])
     new_cargo_bay_item.name = "extradimensional-cargo-bay"
     new_cargo_bay_item.place_result = "extradimensional-cargo-bay"
@@ -682,7 +676,7 @@ if settings.startup["planetfall-postgame-logistics"].value then
         {
             type = "recipe",
             name = "superposition-transport-belt",
-            category = "cryogenics",
+            categories={"cryogenics"},
             surface_conditions = {
                 {
                     property = "gravity",
@@ -710,7 +704,7 @@ if settings.startup["planetfall-postgame-logistics"].value then
         {
             type = "recipe",
             name = "superposition-underground-belt",
-            category = "cryogenics",
+            categories={"cryogenics"},
             surface_conditions = {
                 {
                     property = "gravity",
@@ -738,7 +732,7 @@ if settings.startup["planetfall-postgame-logistics"].value then
         {
             type = "recipe",
             name = "superposition-splitter",
-            category = "cryogenics",
+            categories={"cryogenics"},
             surface_conditions = {
                 {
                     property = "gravity",
@@ -848,11 +842,11 @@ if settings.startup["planetfall-postgame-logistics"].value then
         {
             type = "recipe",
             name = "extradimensional-cargo-wagon",
-            category = "cryogenics",
+            categories={"cryogenics"},
             ingredients = {
                 {type="item", name="cargo-wagon", amount=10},
-                {type="item", name="quantum-processor", amount=10},
-                {type="item", name="electric-engine-unit", amount=30},
+                {type="item", name="quantum-processor", amount=20},
+                {type="item", name="electric-engine-unit", amount=50},
                 {type="fluid", name="fluoroketone-cold", amount=100},
             },
             results = {
@@ -871,11 +865,11 @@ if settings.startup["planetfall-postgame-logistics"].value then
         {
             type = "recipe",
             name = "extradimensional-fluid-wagon",
-            category = "cryogenics",
+            categories={"cryogenics"},
             ingredients = {
                 {type="item", name="fluid-wagon", amount=10},
-                {type="item", name="quantum-processor", amount=10},
-                {type="item", name="engine-unit", amount=30},
+                {type="item", name="quantum-processor", amount=20},
+                {type="item", name="engine-unit", amount=50},
                 {type="fluid", name="fluoroketone-cold", amount=100},
             },
             results = {
@@ -894,11 +888,11 @@ if settings.startup["planetfall-postgame-logistics"].value then
         {
             type = "recipe",
             name = "extradimensional-cargo-bay",
-            category = "cryogenics",
+            categories={"cryogenics"},
             ingredients = {
                 {type="item", name="cargo-bay", amount=5},
-                {type="item", name="quantum-processor", amount=10},
-                {type="item", name="supercapacitor", amount=30},
+                {type="item", name="quantum-processor", amount=30},
+                {type="item", name="supercapacitor", amount=50},
                 {type="fluid", name="fluoroketone-cold", amount=100},
             },
             results = {
@@ -1030,7 +1024,7 @@ if settings.startup["planetfall-postgame-logistics"].value then
     end
 
     if misc.difficulty == 3 and mods["BrassTacksMk2"] and mods["IfNickelMk2"] then
-        rm.AddIngredient("extradimensional-cargo-wagon", "spurving-bearing", 20)
+        rm.AddIngredient("extradimensional-cargo-wagon", "spurving-bearing", 30)
         rm.AddIngredient("extradimensional-fluid-wagon", "non-reversible-tremie-pipe", 20)
     end
 

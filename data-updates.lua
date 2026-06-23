@@ -2,6 +2,10 @@ local rm = require("__pf-functions__/recipe-manipulation")
 local tm = require("__pf-functions__/technology-manipulation")
 local misc = require("__pf-functions__/misc")
 
+if mods["Age-of-Production"] then
+    require("compat.age-of-production")
+end
+
 if misc.difficulty > 1 then
     rm.ReplaceIngredientProportional("rocket-part", "processing-unit", "rocket-control-unit")
     rm.ReplaceIngredientProportional("rocket-part-muluna", "processing-unit", "rocket-control-unit")
@@ -14,6 +18,7 @@ if misc.difficulty > 1 then
     rm.ReplaceIngredientProportional("cargo-landing-pad", "processing-unit", "rocket-control-unit")
     rm.ReplaceIngredientProportional("space-platform-starter-pack", "processing-unit", "rocket-control-unit")
     rm.ReplaceIngredientProportional("cargo-bay", "processing-unit", "rocket-control-unit")
+    rm.ReplaceIngredientProportional("landing-pad-unloading-bay", "processing-unit", "rocket-control-unit")
     rm.ReplaceIngredientProportional("artillery-turret", "processing-unit", "rocket-control-unit")
     rm.ReplaceIngredientProportional("artillery-wagon", "processing-unit", "rocket-control-unit")
     rm.ReplaceIngredientProportional("rocket-turret", "processing-unit", "rocket-control-unit")
@@ -63,7 +68,7 @@ table.insert(data.raw["simple-entity"]["fulgoran-ruin-vault"].minable.results, {
 table.insert(data.raw["simple-entity"]["fulgoran-ruin-vault"].minable.results, {type="item", name="medium-electric-pole", amount=6})
 
 if mods["Cerys-Moon-of-Fulgora"] then
-    table.insert(data.raw["simple-entity"]["cerys-ruin-huge"].minable.results, {type="item", name="recycler", amount=1, probability=0.25})
+    table.insert(data.raw["simple-entity"]["cerys-ruin-huge"].minable.results, {type="item", name="recycler", amount=1, independent_probability=0.25})
     table.insert(data.raw["simple-entity"]["cerys-ruin-huge"].minable.results, {type="item", name="accumulator", amount=1})
     table.insert(data.raw["simple-entity"]["cerys-ruin-huge"].minable.results, {type="item", name="medium-electric-pole", amount=1})
 
@@ -180,23 +185,31 @@ if misc.difficulty == 3 then
     --vulcanus grants some help with oft-bottlenecking iron and nickel from processing other resources
     --fulgora grants productivity for copper (emplant) and zinc (adv electroplater) already
     --gleba is gleba
-    rm.AddProduct("molten-iron", "lava", 25)
-    rm.AddProduct("molten-copper", "lava", 25)
+    rm.AddProduct("copper-ore-melting", "lava", 25)
+    rm.AddProduct("iron-ore-melting", "lava", 25)
     if mods["BrassTacksMk2"] then
-        rm.AddProduct("molten-zinc", "lava", 25)
+        rm.AddProduct("zinc-ore-melting", "lava", 25)
     end
     if mods["IfNickelMk2"] then
-        rm.AddProduct("molten-nickel", "lava", 25)
+        rm.AddProduct("nickel-ore-melting", "lava", 25)
     end
     if mods["castra"] then
         rm.AddProduct("advanced-nickel-processing", "lava", 20)
     end
 end
 
+rm.RemoveIngredient("casting-iron-stick", "molten-iron", 10)
+for k, v in pairs(data.raw.recipe["scrap-recycling"].results) do
+    if v.shared_probability then
+        v.independent_probability = v.shared_probability.max - v.shared_probability.min
+        v.shared_probability = nil
+    end
+end
+
 if data.raw.item["quantum-encabulator"] then
     tm.AddUnlock("promethium-science-pack", "quantum-encabulator", "-promethium-science-pack")
     rm.ReplaceIngredientProportional("promethium-science-pack", "quantum-processor", "quantum-encabulator")
-    data.raw.tool["promethium-science-pack"].localised_name = {"item-name.encabulation-science-pack"}
+    data.raw.item["promethium-science-pack"].localised_name = {"item-name.encabulation-science-pack"}
     data.raw.technology["promethium-science-pack"].localised_name = {"technology-name.encabulation-science-pack"}
 
     if mods["Age-of-Production"] then
@@ -215,16 +228,22 @@ end
 
 data.raw.module["efficiency-module-2"].effect = {
     consumption = -0.5,
-    pollution = -0.1
+    pollution = -0.05
 }
 data.raw.module["efficiency-module-3"].effect = {
     consumption = -0.75,
-    pollution = -0.2
+    pollution = -0.1
 }
 data.raw.module["quality-module-3"].effect = {
     speed = -0.05,
-    quality = 0.3
+    quality = 0.03
 }
+
+if mods["tuner-upper"] then
+    if settings.startup["tuner-upper-nerf-quality-power"] then
+        data.raw.module["efficiency-module-3"].effect.consumption = -0.8
+    end
+end
 
 if mods["LunarLandings"] then
     data.raw.technology["rocket-control-unit"].localised_name = {"technology-name.ll-rocket-control-unit"}
@@ -304,12 +323,9 @@ if misc.difficulty > 1 then
         tm.AddSciencePack("productivity-module-3", "production-science-pack")
         tm.AddSciencePack("productivity-module-3", "utility-science-pack")
         
-        rm.RemoveRecipeCategory("productivity-module-3", "electronics")
+        rm.RemoveRecipeCategory("productivity-module-3", "crafting")
         rm.AddRecipeCategory("productivity-module-3", "electromagnetics")
         rm.AddRecipeCategory("productivity-module-3", "cryogenics")    
-
-        table.insert(data.raw["assembling-machine"]["electromagnetic-plant"].crafting_categories, "electronics-or-cryogenics")
-        table.insert(data.raw["assembling-machine"]["cryogenic-plant"].crafting_categories, "electronics-or-cryogenics")
 
         rm.ReplaceIngredientProportional("productivity-module-3", "processing-unit", "quantum-processor")
         rm.ReplaceIngredientProportional("productivity-module-3", "advanced-circuit", "ice", 10)
@@ -322,10 +338,14 @@ if misc.difficulty > 1 then
         rm.AddIngredient("cryogenic-plant", "speed-module-3", 1)
         rm.RemoveIngredient("cryogenic-plant", "processing-unit", 20)
 
-        if not (mods["no-more-quality"] or mods["unquality"] or mods["no-quality"]) then
+        if mods["quality"] then
             tm.AddPrerequisite("fusion-reactor", "quality-module-3")
             rm.AddIngredient("fusion-reactor", "quality-module-3")
             rm.AddIngredient("fusion-generator", "quality-module-3")
+        else
+            tm.AddPrerequisite("fusion-reactor", "productivity-module-3")
+            rm.AddIngredient("fusion-reactor", "productivity-module-3")
+            rm.AddIngredient("fusion-generator", "productivity-module-3")
         end
 
         tm.AddSciencePacks("productivity-module-3", tm.post_aquilo_sciences)
@@ -353,7 +373,7 @@ if misc.difficulty > 1 then
         }
 
         tm.AddPrerequisite("productivity-module-3", "uranium-processing")
-        rm.ReplaceIngredientProportional("productivity-module-3", "advanced-circuit", "uranium-238")
+        rm.ReplaceIngredientProportional("productivity-module-3", "advanced-circuit", "uranium-235")
     end
 end
 
@@ -416,14 +436,16 @@ end
 
 require("compat.small-mod")
 
-if mods["quality"] and misc.last_pf_mod == "pf-sa-compat" then
-    require("__quality__/data-updates.lua")
+if mods["recycler"] and misc.last_pf_mod == "pf-sa-compat" then
+    require("__recycler__/data-updates.lua")
 
     local biggest_result_list = data.raw.furnace.recycler.result_inventory_size
     for k, v in pairs(data.raw.recipe) do
-      if v.category == "recycling" or v.category == "recycling-or-hand-crafting" then
-        if v.results and #v.results > biggest_result_list then
-          biggest_result_list = #v.results
+      for k2, v2 in pairs(v.categories or {"crafting"}) do
+        if v2 == "recycling" or v2 == "recycling-or-hand-crafting" then
+          if v.results and #v.results > biggest_result_list then
+            biggest_result_list = #v.results
+          end
         end
       end
     end

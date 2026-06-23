@@ -24,9 +24,13 @@ When playing with Lunar Landings, that mod's Rocket Control Units used for launc
 
 # Space science nerf #
 
-On Maximal difficulty, space science is less productive so you may want to look into scaling it earlier. It's also needed for all productivity researches.
+On Maximal difficulty, space science is less productive so you may want to look into scaling it earlier. It's also needed for all productivity researches. With most More Materials mods, space science will require additional ingredients. This will require imports from the ground or, once advanced asteroid processing is unlocked, a more complex setup for self-sufficiency.
 
-With most More Materials mods, space science will require additional ingredients. This will require imports from the ground or, once advanced asteroid processing is unlocked, a more complex setup for self-sufficiency.
+# Research Tiering #
+
+On Moderate and Maximal difficulty, repeatable buff techs will require additonal science packs every few levels. For example, purple science will only get you to level 5 of mining productivity. Levels 6-10 will need space science, 11-20 will need agricultural science, etc.
+
+This feature can be toggled. LOADING AN EXISTING SAVE WITH A DIFFERENT VALUE OF THIS SETTING WILL REVERT REPEATABLE RESEARCH.
 
 # Module tweaks #
 
@@ -41,6 +45,14 @@ The point of these changes is to encourage more diverse production per planet th
 # Free lava #
 
 On Maximal, molten metal from ore recipes now output a small amount of lava. This is what is known as a "purely beneficial nuisance."
+
+# Casting Iron Sticks #
+
+The vanilla Casting Iron Stick recipe requires 50% of the molten iron, bringing it in line with the Casting Iron Gear recipe. You're welcome.
+
+# Scrap Recycling #
+
+Scrap recycling is reverted to use independent probability like it did in 2.0. I just like it better that way and ensures any new products added to scrap by other resource mods work consistently with the vanilla products, even if the total chance goes over 100%.
 
 # Fulgora softlock prevention #
 

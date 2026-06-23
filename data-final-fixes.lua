@@ -28,9 +28,9 @@ for k, v in pairs(asteroid_reprocessing) do
     local result_list = {}
     for k2, v2 in pairs(asteroid_reprocessing) do
         if k == k2 then
-            table.insert(result_list, {type="item", name=v2, amount=1, probability=2/out_of})
+            table.insert(result_list, {type="item", name=v2, amount=1, independent_probability=2/out_of})
         else
-            table.insert(result_list, {type="item", name=v2, amount=1, probability=1/out_of})
+            table.insert(result_list, {type="item", name=v2, amount=1, independent_probability=1/out_of})
         end
     end
     data.raw.recipe[k].results = table.deepcopy(result_list)
