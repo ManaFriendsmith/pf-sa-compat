@@ -437,7 +437,7 @@ end
 require("compat.small-mod")
 
 if mods["recycler"] and misc.last_pf_mod == "pf-sa-compat" then
-    require("__recycler__/data-updates.lua")
+    rm.RegenerateRecyclingRecipes()
 
     local biggest_result_list = data.raw.furnace.recycler.result_inventory_size
     for k, v in pairs(data.raw.recipe) do
