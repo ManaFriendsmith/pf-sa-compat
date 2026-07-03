@@ -209,6 +209,7 @@ end
 if data.raw.item["quantum-encabulator"] then
     tm.AddUnlock("promethium-science-pack", "quantum-encabulator", "-promethium-science-pack")
     rm.ReplaceIngredientProportional("promethium-science-pack", "quantum-processor", "quantum-encabulator")
+    rm.AddProduct("promethium-science-pack", "promethium-science-pack", 10)
     data.raw.item["promethium-science-pack"].localised_name = {"item-name.encabulation-science-pack"}
     data.raw.technology["promethium-science-pack"].localised_name = {"technology-name.encabulation-science-pack"}
 
