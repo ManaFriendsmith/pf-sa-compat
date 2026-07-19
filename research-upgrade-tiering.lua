@@ -21,12 +21,13 @@ if settings.startup["planetfall-research-tiering"].value then
             base_tech_name = technology.name
         end
         tech_out.name = base_tech_name .. "-" .. (maxlevel + 1)
-        tech_out.prerequisites = {technology.name}
+        tech_out.prerequisites = { technology.name }
         return tech_out
     end
 
     data.raw.technology["mining-productivity-6"] = nil
-    local mp1 = mods["LunarLandings"] and data.raw.technology["mining-productivity-5"] or snip_research_path("mining-productivity-3", 5)
+    local mp1 = mods["LunarLandings"] and data.raw.technology["mining-productivity-5"] or
+        snip_research_path("mining-productivity-3", 5)
     tm.RemoveSciencePack(mp1, "ll-quantum-science-pack")
     tm.AddSciencePack(mp1, "space-science-pack")
     tm.AddPrerequisite(mp1, "space-science-pack")
@@ -62,7 +63,7 @@ if settings.startup["planetfall-research-tiering"].value then
             tm.AddSciencePack(mp6, "ll-quantum-science-pack")
             tm.AddPrerequisite(mp6, "ll-quantum-science-pack")
         end
-        data:extend({mp6})
+        data:extend({ mp6 })
         mp7 = snip_research_path(mp6, 50)
     else
         mp7 = snip_research_path(mp5, 40)
@@ -70,7 +71,7 @@ if settings.startup["planetfall-research-tiering"].value then
     tm.AddSciencePacks(mp7, tm.post_promethium_sciences)
     tm.AddPrerequisite(mp7, "promethium-science-pack")
 
-    data:extend({mp1, mp2, mp3, mp4, mp5, mp7})
+    data:extend({ mp1, mp2, mp3, mp4, mp5, mp7 })
     base_tech_name = false
 
     local steel1 = snip_research_path("steel-plate-productivity", 5)
@@ -93,7 +94,7 @@ if settings.startup["planetfall-research-tiering"].value then
     tm.AddSciencePacks(steel4, tm.post_promethium_sciences)
     tm.AddPrerequisite(steel4, "promethium-science-pack")
     steel4.max_level = 30
-    data:extend({steel1, steel2, steel3, steel4})
+    data:extend({ steel1, steel2, steel3, steel4 })
     base_tech_name = false
 
     local lds1 = snip_research_path("low-density-structure-productivity", mods["tuner-upper"] and 2 or 5)
@@ -114,7 +115,7 @@ if settings.startup["planetfall-research-tiering"].value then
     tm.AddSciencePacks(lds4, tm.post_promethium_sciences)
     tm.AddPrerequisite(lds4, "promethium-science-pack")
     lds4.max_level = mods["tuner-upper"] and 10 or 30
-    data:extend({lds1, lds2, lds3, lds4})
+    data:extend({ lds1, lds2, lds3, lds4 })
     base_tech_name = false
 
     local pu1 = snip_research_path("processing-unit-productivity", mods["tuner-upper"] and 2 or 5)
@@ -135,7 +136,7 @@ if settings.startup["planetfall-research-tiering"].value then
     tm.AddSciencePacks(pu4, tm.post_promethium_sciences)
     tm.AddPrerequisite(pu4, "promethium-science-pack")
     pu4.max_level = mods["tuner-upper"] and 10 or 30
-    data:extend({pu1, pu2, pu3, pu4})
+    data:extend({ pu1, pu2, pu3, pu4 })
     base_tech_name = false
 
     local rf1 = snip_research_path("rocket-fuel-productivity", mods["tuner-upper"] and 2 or 5)
@@ -156,7 +157,7 @@ if settings.startup["planetfall-research-tiering"].value then
     tm.AddSciencePacks(rf4, tm.post_promethium_sciences)
     tm.AddPrerequisite(rf4, "promethium-science-pack")
     rf4.max_level = mods["tuner-upper"] and 10 or 30
-    data:extend({rf1, rf2, rf3, rf4})
+    data:extend({ rf1, rf2, rf3, rf4 })
     base_tech_name = false
 
     local pb1 = snip_research_path("plastic-bar-productivity", 5)
@@ -177,7 +178,7 @@ if settings.startup["planetfall-research-tiering"].value then
     tm.AddSciencePacks(pb4, tm.post_promethium_sciences)
     tm.AddPrerequisite(pb4, "promethium-science-pack")
     pb4.max_level = 30
-    data:extend({pb1, pb2, pb3, pb4})
+    data:extend({ pb1, pb2, pb3, pb4 })
     base_tech_name = false
 
     local sr1 = snip_research_path("scrap-recycling-productivity", 5)
@@ -198,7 +199,7 @@ if settings.startup["planetfall-research-tiering"].value then
     tm.AddSciencePacks(sr4, tm.post_promethium_sciences)
     tm.AddPrerequisite(sr4, "promethium-science-pack")
     sr4.max_level = 30
-    data:extend({sr1, sr2, sr3, sr4})
+    data:extend({ sr1, sr2, sr3, sr4 })
     base_tech_name = false
 
     local ap1 = snip_research_path("asteroid-productivity", 5)
@@ -219,15 +220,19 @@ if settings.startup["planetfall-research-tiering"].value then
     tm.AddSciencePacks(ap4, tm.post_promethium_sciences)
     tm.AddPrerequisite(ap4, "promethium-science-pack")
     sr4.max_level = 30
-    data:extend({ap1, ap2, ap3, ap4})
+    data:extend({ ap1, ap2, ap3, ap4 })
     base_tech_name = false
 
-    local rp1 = snip_research_path(mods["planet-muluna"] and "rocket-part-productivity-aquilo" or "rocket-part-productivity", mods["planet-muluna"] and 5 or 10)
+    tm.AddSciencePacks(mods["planet-muluna"] and "rocket-part-productivity-aquilo" or "rocket-part-productivity",
+        tm.post_aquilo_sciences)
+    local rp1 = snip_research_path(
+        mods["planet-muluna"] and "rocket-part-productivity-aquilo" or "rocket-part-productivity",
+        mods["planet-muluna"] and 5 or 10)
     tm.AddPrerequisite(rp1, "promethium-science-pack")
     tm.AddSciencePacks(rp1, tm.post_promethium_sciences)
-    data:extend({rp1})
+    data:extend({ rp1 })
     rp1.max_level = 30
-    
+
     base_tech_name = "worker-robots-speed"
     local rs1 = snip_research_path("worker-robots-speed-7", 15)
     tm.AddPrerequisite(rs1, "cryogenic-science-pack")
@@ -235,7 +240,7 @@ if settings.startup["planetfall-research-tiering"].value then
     local rs2 = snip_research_path(rs1, 25)
     tm.AddPrerequisite(rs2, "promethium-science-pack")
     tm.AddSciencePacks(rs2, tm.post_promethium_sciences)
-    data:extend({rs1, rs2})
+    data:extend({ rs1, rs2 })
 
     base_tech_name = "physical-projectile-damage"
     local phys1 = snip_research_path("physical-projectile-damage-7", 10)
@@ -265,7 +270,7 @@ if settings.startup["planetfall-research-tiering"].value then
     local phys5 = snip_research_path(phys4, 30)
     tm.AddSciencePacks(phys5, tm.post_promethium_sciences)
     tm.AddPrerequisite(phys5, "promethium-science-pack")
-    data:extend({phys1, phys2, phys3, phys4, phys5})
+    data:extend({ phys1, phys2, phys3, phys4, phys5 })
 
     base_tech_name = "laser-weapons-damage"
     local las1 = snip_research_path("laser-weapons-damage-7", 10)
@@ -295,7 +300,7 @@ if settings.startup["planetfall-research-tiering"].value then
     local las5 = snip_research_path(las4, 30)
     tm.AddSciencePacks(las5, tm.post_promethium_sciences)
     tm.AddPrerequisite(las5, "promethium-science-pack")
-    data:extend({las1, las2, las3, las4, las5})
+    data:extend({ las1, las2, las3, las4, las5 })
 
     base_tech_name = "stronger-explosives"
     local exp2 = snip_research_path("stronger-explosives-7", 15)
@@ -322,7 +327,7 @@ if settings.startup["planetfall-research-tiering"].value then
     local exp5 = snip_research_path(exp4, 30)
     tm.AddSciencePacks(exp5, tm.post_promethium_sciences)
     tm.AddPrerequisite(exp5, "promethium-science-pack")
-    data:extend({exp2, exp3, exp4, exp5})
+    data:extend({ exp2, exp3, exp4, exp5 })
 
     base_tech_name = "refined-flammables"
     local flam2 = snip_research_path("refined-flammables-7", 15)
@@ -349,7 +354,7 @@ if settings.startup["planetfall-research-tiering"].value then
     local flam5 = snip_research_path(flam4, 30)
     tm.AddSciencePacks(flam5, tm.post_promethium_sciences)
     tm.AddPrerequisite(flam5, "promethium-science-pack")
-    data:extend({flam2, flam3, flam4, flam5})
+    data:extend({ flam2, flam3, flam4, flam5 })
 
     base_tech_name = "electric-weapons-damage"
     local ele2 = snip_research_path("electric-weapons-damage-4", 10)
@@ -376,7 +381,7 @@ if settings.startup["planetfall-research-tiering"].value then
     local ele5 = snip_research_path(ele4, 25)
     tm.AddSciencePacks(ele5, tm.post_promethium_sciences)
     tm.AddPrerequisite(ele5, "promethium-science-pack")
-    data:extend({ele2, ele3, ele4, ele5})
+    data:extend({ ele2, ele3, ele4, ele5 })
 
     base_tech_name = false
 
@@ -402,7 +407,7 @@ if settings.startup["planetfall-research-tiering"].value then
         tm.AddPrerequisite(exp4, "promethium-science-pack")
         tm.AddSciencePacks(exp4, tm.post_promethium_sciences)
         exp4.max_level = 30
-        data:extend({exp1, exp2, exp3, exp4})
+        data:extend({ exp1, exp2, exp3, exp4 })
         base_tech_name = false
     end
 
@@ -410,7 +415,7 @@ if settings.startup["planetfall-research-tiering"].value then
         local bc1 = snip_research_path("bioculture-productivity", 10)
         tm.AddSciencePacks(bc1, tm.post_promethium_sciences)
         tm.AddPrerequisite(bc1, "promethium-science-pack")
-        data:extend({bc1})
+        data:extend({ bc1 })
         base_tech_name = false
     end
 
@@ -419,7 +424,7 @@ if settings.startup["planetfall-research-tiering"].value then
         tm.AddSciencePacks(grp1, tm.post_promethium_sciences)
         tm.AddPrerequisite(grp1, "promethium-science-pack")
         grp1.max_level = 30
-        data:extend({grp1})
+        data:extend({ grp1 })
         base_tech_name = false
     end
 
@@ -431,7 +436,7 @@ if settings.startup["planetfall-research-tiering"].value then
         tm.AddSciencePacks(conc2, tm.post_promethium_sciences)
         tm.AddPrerequisite(conc2, "promethium-science-pack")
         conc2.max_level = 30
-        data:extend({conc1, conc2})
+        data:extend({ conc1, conc2 })
         base_tech_name = false
     end
 
@@ -466,7 +471,7 @@ if settings.startup["planetfall-research-tiering"].value then
         tm.AddPrerequisite(eup4, "promethium-science-pack")
         tm.AddSciencePacks(eup4, tm.post_promethium_sciences)
         eup4.max_level = 30
-        data:extend({eup1, eup2, eup3, eup4})
+        data:extend({ eup1, eup2, eup3, eup4 })
         base_tech_name = false
     end
 
@@ -482,7 +487,7 @@ if settings.startup["planetfall-research-tiering"].value then
         tm.AddPrerequisite(wr2, "promethium-science-pack")
         tm.AddSciencePacks(wr2, tm.post_promethium_sciences)
         wr2.max_level = 30
-        data:extend({wr1, wr2})
+        data:extend({ wr1, wr2 })
         base_tech_name = false
     end
 
@@ -495,8 +500,7 @@ if settings.startup["planetfall-research-tiering"].value then
         tm.AddPrerequisite(h2, "promethium-science-pack")
         tm.AddSciencePacks(h2, tm.post_promethium_sciences)
         h2.max_level = 30
-        data:extend({h1, h2})
+        data:extend({ h1, h2 })
         base_tech_name = false
     end
-
 end

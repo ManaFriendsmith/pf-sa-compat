@@ -45,15 +45,15 @@ if misc.difficulty > 1 then
     data.raw.item["rocket-part"].order = "z"
     if mods["maraxsis"] then
         data.raw.item["maraxsis-super-sealant-substance"].subgroup = "rocket-components"
-        data.raw.item["maraxsis-super-sealant-substance"].order = "e"    
+        data.raw.item["maraxsis-super-sealant-substance"].order = "e"
 
         data.raw.recipe["maraxsis-hydrolox-rocket-fuel"].subgroup = "rocket-components"
-        data.raw.recipe["maraxsis-hydrolox-rocket-fuel"].order = "c4"    
+        data.raw.recipe["maraxsis-hydrolox-rocket-fuel"].order = "c4"
     end
 
     if mods["IfNickelMk2"] then
         data.raw.item["gimbaled-rocket-engine"].subgroup = "rocket-components"
-        data.raw.item["gimbaled-rocket-engine"].order = "d"    
+        data.raw.item["gimbaled-rocket-engine"].order = "d"
     end
 end
 
@@ -63,39 +63,51 @@ end
 --i don't want to compromise the recipes of basic infrastructure on nauvis to make fulgora playable.
 --i want a failsafe for unforeseen mod combination weirdness: as long as there is a way to get each resource from recycling, you are in some sense "safe."
 --all this needs is a guaranteed on-ramp to electricity and recyclers.
-table.insert(data.raw["simple-entity"]["fulgoran-ruin-vault"].minable.results, {type="item", name="recycler", amount=2})
-table.insert(data.raw["simple-entity"]["fulgoran-ruin-vault"].minable.results, {type="item", name="accumulator", amount=4})
-table.insert(data.raw["simple-entity"]["fulgoran-ruin-vault"].minable.results, {type="item", name="medium-electric-pole", amount=6})
+table.insert(data.raw["simple-entity"]["fulgoran-ruin-vault"].minable.results, { type = "item", name = "recycler", amount = 2 })
+table.insert(data.raw["simple-entity"]["fulgoran-ruin-vault"].minable.results,
+    { type = "item", name = "accumulator", amount = 4 })
+table.insert(data.raw["simple-entity"]["fulgoran-ruin-vault"].minable.results,
+    { type = "item", name = "medium-electric-pole", amount = 6 })
 
 if mods["Cerys-Moon-of-Fulgora"] then
-    table.insert(data.raw["simple-entity"]["cerys-ruin-huge"].minable.results, {type="item", name="recycler", amount=1, independent_probability=0.25})
-    table.insert(data.raw["simple-entity"]["cerys-ruin-huge"].minable.results, {type="item", name="accumulator", amount=1})
-    table.insert(data.raw["simple-entity"]["cerys-ruin-huge"].minable.results, {type="item", name="medium-electric-pole", amount=1})
+    table.insert(data.raw["simple-entity"]["cerys-ruin-huge"].minable.results,
+        { type = "item", name = "recycler", amount = 1, independent_probability = 0.25 })
+    table.insert(data.raw["simple-entity"]["cerys-ruin-huge"].minable.results,
+        { type = "item", name = "accumulator", amount = 1 })
+    table.insert(data.raw["simple-entity"]["cerys-ruin-huge"].minable.results,
+        { type = "item", name = "medium-electric-pole", amount = 1 })
 
-    table.insert(data.raw["simple-entity"]["cerys-ruin-colossal"].minable.results, {type="item", name="recycler", amount=1})
-    table.insert(data.raw["simple-entity"]["cerys-ruin-colossal"].minable.results, {type="item", name="accumulator", amount_min=1, amount_max=2})
-    table.insert(data.raw["simple-entity"]["cerys-ruin-colossal"].minable.results, {type="item", name="medium-electric-pole", amount_min=1, amount_max=3})
+    table.insert(data.raw["simple-entity"]["cerys-ruin-colossal"].minable.results,
+        { type = "item", name = "recycler", amount = 1 })
+    table.insert(data.raw["simple-entity"]["cerys-ruin-colossal"].minable.results,
+        { type = "item", name = "accumulator", amount_min = 1, amount_max = 2 })
+    table.insert(data.raw["simple-entity"]["cerys-ruin-colossal"].minable.results,
+        { type = "item", name = "medium-electric-pole", amount_min = 1, amount_max = 3 })
 end
 
 if mods["IfNickelMk2"] and mods["BrassTacksMk2"] then
     rm.RemoveProduct("advanced-metallic-asteroid-crushing", "copper-ore", 4)
 
-    data.raw.recipe["metallic-asteroid-crushing"].localised_name = {"recipe-name.ferrous-asteroid-crushing"}
-    data.raw.recipe["metallic-asteroid-reprocessing"].localised_name = {"recipe-name.ferrous-asteroid-reprocessing"}
-    data.raw.recipe["advanced-metallic-asteroid-crushing"].localised_name = {"recipe-name.advanced-ferrous-asteroid-crushing"}
-    data.raw.recipe["advanced-metallic-asteroid-crushing"].icon = "__pf-sa-compat__/graphics/icons/advanced-ferrous-asteroid-crushing.png"    
+    data.raw.recipe["metallic-asteroid-crushing"].localised_name = { "recipe-name.ferrous-asteroid-crushing" }
+    data.raw.recipe["metallic-asteroid-reprocessing"].localised_name = { "recipe-name.ferrous-asteroid-reprocessing" }
+    data.raw.recipe["advanced-metallic-asteroid-crushing"].localised_name = {
+        "recipe-name.advanced-ferrous-asteroid-crushing" }
+    data.raw.recipe["advanced-metallic-asteroid-crushing"].icon =
+    "__pf-sa-compat__/graphics/icons/advanced-ferrous-asteroid-crushing.png"
 
-    data.raw["asteroid"]["huge-metallic-asteroid"].localised_name = {"entity-name.huge-ferrous-asteroid"}
-    data.raw["asteroid"]["big-metallic-asteroid"].localised_name = {"entity-name.big-ferrous-asteroid"}
-    data.raw["asteroid"]["medium-metallic-asteroid"].localised_name = {"entity-name.medium-ferrous-asteroid"}
-    data.raw["asteroid"]["small-metallic-asteroid"].localised_name = {"entity-name.small-ferrous-asteroid"}
-    data.raw["asteroid-chunk"]["metallic-asteroid-chunk"].localised_name = {"asteroid-chunk-name.ferrous-asteroid-chunk"}
-    data.raw["item"]["metallic-asteroid-chunk"].localised_name = {"item-name.ferrous-asteroid-chunk"}
+    data.raw["asteroid"]["huge-metallic-asteroid"].localised_name = { "entity-name.huge-ferrous-asteroid" }
+    data.raw["asteroid"]["big-metallic-asteroid"].localised_name = { "entity-name.big-ferrous-asteroid" }
+    data.raw["asteroid"]["medium-metallic-asteroid"].localised_name = { "entity-name.medium-ferrous-asteroid" }
+    data.raw["asteroid"]["small-metallic-asteroid"].localised_name = { "entity-name.small-ferrous-asteroid" }
+    data.raw["asteroid-chunk"]["metallic-asteroid-chunk"].localised_name = { "asteroid-chunk-name.ferrous-asteroid-chunk" }
+    data.raw["item"]["metallic-asteroid-chunk"].localised_name = { "item-name.ferrous-asteroid-chunk" }
 end
 
 if data.raw.item["philosophers-hormone"] then
-    table.insert(data.raw["simple-entity"]["copper-stromatolite"].minable.results, {type="item", name="philosophers-hormone", amount_min=1, amount_max=5})
-    table.insert(data.raw["simple-entity"]["iron-stromatolite"].minable.results, {type="item", name="philosophers-hormone", amount_min=1, amount_max=5})
+    table.insert(data.raw["simple-entity"]["copper-stromatolite"].minable.results,
+        { type = "item", name = "philosophers-hormone", amount_min = 1, amount_max = 5 })
+    table.insert(data.raw["simple-entity"]["iron-stromatolite"].minable.results,
+        { type = "item", name = "philosophers-hormone", amount_min = 1, amount_max = 5 })
 
     tm.AddUnlock("biochamber", "philosophers-hormone-from-copper-bacteria")
     tm.AddUnlock("biochamber", "philosophers-hormone-from-iron-bacteria")
@@ -123,7 +135,7 @@ end
 --obviously the latter is "cheaper" but having it fully self sufficient requires some weird actions to get e.g. lubricant in space
 --or just install muluna i guess
 if misc.difficulty == 3 then
-    local candidate_intermediates = {"gyro", "invar-plate", "stepper-motor", "differential-girdlespring"}
+    local candidate_intermediates = { "gyro", "invar-plate", "stepper-motor", "differential-girdlespring" }
     local multiplier = 1
     for k, v in pairs(candidate_intermediates) do
         if data.raw.item[v] then
@@ -209,9 +221,9 @@ end
 if data.raw.item["quantum-encabulator"] then
     tm.AddUnlock("promethium-science-pack", "quantum-encabulator", "-promethium-science-pack")
     rm.ReplaceIngredientProportional("promethium-science-pack", "quantum-processor", "quantum-encabulator")
-    rm.AddProduct("promethium-science-pack", "promethium-science-pack", 10)
-    data.raw.item["promethium-science-pack"].localised_name = {"item-name.encabulation-science-pack"}
-    data.raw.technology["promethium-science-pack"].localised_name = {"technology-name.encabulation-science-pack"}
+    rm.AddProduct("promethium-science-pack", "promethium-science-pack", 5)
+    data.raw.item["promethium-science-pack"].localised_name = { "item-name.encabulation-science-pack" }
+    data.raw.technology["promethium-science-pack"].localised_name = { "technology-name.encabulation-science-pack" }
 
     if mods["Age-of-Production"] then
         rm.ReplaceIngredientProportional("aop-quantum-stabilizer", "quantum-processor", "quantum-encabulator", 0.1)
@@ -247,7 +259,7 @@ if mods["tuner-upper"] then
 end
 
 if mods["LunarLandings"] then
-    data.raw.technology["rocket-control-unit"].localised_name = {"technology-name.ll-rocket-control-unit"}
+    data.raw.technology["rocket-control-unit"].localised_name = { "technology-name.ll-rocket-control-unit" }
     data.raw.technology["rocket-control-unit"].icon = "__pf-sa-compat__/graphics/technology/lunar-navigation-unit.png"
     data.raw.item["ll-rocket-control-unit"].icon = "__pf-sa-compat__/graphics/icons/lunar-navigation-unit.png"
 
@@ -257,9 +269,12 @@ if mods["LunarLandings"] then
         end
     end
 
-    set_all_icons(data.raw.item["ll-packed-rocket-control-unit"], "__pf-sa-compat__/graphics/icons/lunar-navigation-unit.png")
-    set_all_icons(data.raw.recipe["ll-pack-rocket-control-unit"], "__pf-sa-compat__/graphics/icons/lunar-navigation-unit.png")
-    set_all_icons(data.raw.recipe["ll-unpack-rocket-control-unit"], "__pf-sa-compat__/graphics/icons/lunar-navigation-unit.png")
+    set_all_icons(data.raw.item["ll-packed-rocket-control-unit"],
+        "__pf-sa-compat__/graphics/icons/lunar-navigation-unit.png")
+    set_all_icons(data.raw.recipe["ll-pack-rocket-control-unit"],
+        "__pf-sa-compat__/graphics/icons/lunar-navigation-unit.png")
+    set_all_icons(data.raw.recipe["ll-unpack-rocket-control-unit"],
+        "__pf-sa-compat__/graphics/icons/lunar-navigation-unit.png")
 end
 
 if misc.difficulty > 1 then
@@ -302,13 +317,12 @@ if misc.difficulty > 1 then
 
     rm.ReplaceIngredientProportional("quality-module-3", "superconductor", "supercapacitor")
     rm.ReplaceIngredientProportional("quality-module-3", "advanced-circuit", "superconductor", 2)
-    
+
     data.raw.module["speed-module-3"].default_import_location = "vulcanus"
     data.raw.module["efficiency-module-3"].default_import_location = "gleba"
     data.raw.module["quality-module-3"].default_import_location = "fulgora"
 
     if misc.difficulty == 3 then
-
         data.raw.module["productivity-module-3"].default_import_location = "aquilo"
         data.raw.recipe["productivity-module-3"].surface_conditions = {
             {
@@ -316,17 +330,17 @@ if misc.difficulty > 1 then
                 max = 600
             }
         }
-    
+
         tm.AddPrerequisite("productivity-module-3", "quantum-processor")
         tm.AddSciencePack("productivity-module-3", "metallurgic-science-pack")
         tm.AddSciencePack("productivity-module-3", "electromagnetic-science-pack")
         tm.AddSciencePack("productivity-module-3", "cryogenic-science-pack")
         tm.AddSciencePack("productivity-module-3", "production-science-pack")
         tm.AddSciencePack("productivity-module-3", "utility-science-pack")
-        
+
         rm.RemoveRecipeCategory("productivity-module-3", "crafting")
         rm.AddRecipeCategory("productivity-module-3", "electromagnetics")
-        rm.AddRecipeCategory("productivity-module-3", "cryogenics")    
+        rm.AddRecipeCategory("productivity-module-3", "cryogenics")
 
         rm.ReplaceIngredientProportional("productivity-module-3", "processing-unit", "quantum-processor")
         rm.ReplaceIngredientProportional("productivity-module-3", "advanced-circuit", "ice", 10)
@@ -356,13 +370,15 @@ if misc.difficulty > 1 then
         end
 
         if mods["Cerys-Moon-of-Fulgora"] then
-            rm.ReplaceIngredientProportional("cerys-radioactive-module-charged", "productivity-module-2", "productivity-module-3", 0.25)
+            rm.ReplaceIngredientProportional("cerys-radioactive-module-charged", "productivity-module-2",
+                "productivity-module-3", 0.25)
             tm.AddSciencePack("cerys-radioactive-module", "cryogenic-science-pack")
             tm.AddPrerequisite("cerys-radioactive-module", "cryogenic-science-pack")
             tm.AddPrerequisite("cerys-radioactive-module", "planetslib-cerys-cargo-drops")
 
             rm.RemoveProduct("cerys-radioactive-module-decayed-recycling", "productivity-module-2", 2)
-            rm.AddProduct("cerys-radioactive-module-decayed-recycling", {type="item", name="productivity-module-3", amount=0, extra_count_fraction=0.5})
+            rm.AddProduct("cerys-radioactive-module-decayed-recycling",
+                { type = "item", name = "productivity-module-3", amount = 0, extra_count_fraction = 0.5 })
         end
     else
         data.raw.recipe["productivity-module-3"].surface_conditions = {
@@ -406,13 +422,13 @@ if settings.startup["planetfall-fulgora-islands-scaling"].value then
             end
         end
     end
-    
+
     fulgora_island_boost("BrassTacksMk2", 10, 20, 25)
     fulgora_island_boost("IfNickelMk2", 10, 20, 25)
     fulgora_island_boost("ThemTharHillsMk2", 10, 15, 20)
     fulgora_island_boost("BrimStuffMk2", 15, 20, 25)
     fulgora_island_boost("LasingAroundMk2", 5, 20, 25)
-    
+
     --bz mods are generally less deeply integrated into crafting trees, their resources are needed in less absolute bulk, and have fewer intermediates, so will need less space for processing
     if mods["bzlead"] then
         fulgora_island_size_base = fulgora_island_size_base + 5
@@ -432,7 +448,9 @@ if settings.startup["planetfall-fulgora-islands-scaling"].value then
 
     local relative_fulgora_island_size_factor = fulgora_island_size_base * 50 / 175
 
-    data.raw["noise-expression"]["fulgora_grid"].expression = fulgora_island_size_base .. " - slider_to_linear(control:fulgora_islands:frequency, -" .. relative_fulgora_island_size_factor ..", " .. relative_fulgora_island_size_factor ..")"
+    data.raw["noise-expression"]["fulgora_grid"].expression = fulgora_island_size_base ..
+    " - slider_to_linear(control:fulgora_islands:frequency, -" ..
+    relative_fulgora_island_size_factor .. ", " .. relative_fulgora_island_size_factor .. ")"
 end
 
 require("compat.small-mod")
@@ -442,13 +460,13 @@ if mods["recycler"] and misc.last_pf_mod == "pf-sa-compat" then
 
     local biggest_result_list = data.raw.furnace.recycler.result_inventory_size
     for k, v in pairs(data.raw.recipe) do
-      for k2, v2 in pairs(v.categories or {"crafting"}) do
-        if v2 == "recycling" or v2 == "recycling-or-hand-crafting" then
-          if v.results and #v.results > biggest_result_list then
-            biggest_result_list = #v.results
-          end
+        for k2, v2 in pairs(v.categories or { "crafting" }) do
+            if v2 == "recycling" or v2 == "recycling-or-hand-crafting" then
+                if v.results and #v.results > biggest_result_list then
+                    biggest_result_list = #v.results
+                end
+            end
         end
-      end
     end
     data.raw.furnace.recycler.result_inventory_size = biggest_result_list
     if mods["Age-of-Production"] then
