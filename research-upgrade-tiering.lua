@@ -236,7 +236,7 @@ if settings.startup["planetfall-research-tiering"].value then
     base_tech_name = "worker-robots-speed"
     local rs1 = snip_research_path("worker-robots-speed-7", 15)
     tm.AddPrerequisite(rs1, "cryogenic-science-pack")
-    tm.AddSciencePacks(rp1, tm.post_aquilo_sciences)
+    tm.AddSciencePacks(rs1, tm.post_aquilo_sciences)
     local rs2 = snip_research_path(rs1, 25)
     tm.AddPrerequisite(rs2, "promethium-science-pack")
     tm.AddSciencePacks(rs2, tm.post_promethium_sciences)
