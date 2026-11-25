@@ -14,6 +14,10 @@ Specifically:
 
 Uh, okay, sure I guess. It's dependent on pf-functions, which includes a difficulty selection of Minimal, Moderate, and Maximal.
 
+# Larger space platforms #
+
+By default space platforms cannot extend more than 200 tiles in front of the hub. Because promethium and space science are a lot more complicated  with all More Materials mods enabled and expect you to build pretty sizeable production in space, I have increased this limit to 2000; however this buff is present without any of the mods it's intended to account for.
+
 # Rocket control units #
 
 On Moderate and Maximal difficulty, rocket parts and a few space-related buildings now cost RCUs instead of blue circuits. They can be boosted by the electromagnetic plant's intrinsic productivity but not by productivity modules. The base recipe is blue circuits + green circuits + batteries.
@@ -24,7 +28,7 @@ When playing with Lunar Landings, that mod's Rocket Control Units used for launc
 
 # Space science nerf #
 
-On Maximal difficulty, space science is less productive so you may want to look into scaling it earlier. It's also needed for all productivity researches. With most More Materials mods, space science will require additional ingredients. This will require imports from the ground or, once advanced asteroid processing is unlocked, a more complex setup for self-sufficiency.
+On Maximal difficulty, space science is less productive so you may want to look into scaling it earlier. It's also needed for all productivity researches. With most More Materials mods, space science will require additional ingredients. This will require imports from a planet or, once advanced asteroid processing is unlocked, a more complex setup for self-sufficiency.
 
 # Research Tiering #
 
