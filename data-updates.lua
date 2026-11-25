@@ -6,6 +6,10 @@ if mods["Age-of-Production"] then
     require("compat.age-of-production")
 end
 
+-- default max is 200 tiles in front of the hub.
+-- i ran into the limit with my promethium ship and shamelessly just increased it lmao.
+data.raw["utility-constants"].default.space_platform_max_size = {{-1000000, -2000}, {1000000, 1000000}}
+
 if misc.difficulty > 1 then
     rm.ReplaceIngredientProportional("rocket-part", "processing-unit", "rocket-control-unit")
     rm.ReplaceIngredientProportional("rocket-part-muluna", "processing-unit", "rocket-control-unit")
@@ -221,7 +225,8 @@ end
 if data.raw.item["quantum-encabulator"] then
     tm.AddUnlock("promethium-science-pack", "quantum-encabulator", "-promethium-science-pack")
     rm.ReplaceIngredientProportional("promethium-science-pack", "quantum-processor", "quantum-encabulator")
-    rm.AddProduct("promethium-science-pack", "promethium-science-pack", 5)
+    rm.MultiplyRecipe("promethium-science-pack", { input = 1, output = 2, time = 2 })
+    --asteroid particles are massive UPS hogs & frankly if you are playing this scaling promethium collection is easy busywork
     data.raw.item["promethium-science-pack"].localised_name = { "item-name.encabulation-science-pack" }
     data.raw.technology["promethium-science-pack"].localised_name = { "technology-name.encabulation-science-pack" }
 
