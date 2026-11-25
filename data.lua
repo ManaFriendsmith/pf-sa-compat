@@ -224,7 +224,7 @@ if mods["BrassTacksMk2"] or mods["IfNickelMk2"] then
                 {
                     icon = "__pf-sa-compat__/graphics/icons/philosophers-hormone.png",
                     icon_size = 64,
-                    icon_mipmaps = 4,        
+                    icon_mipmaps = 4,
                 },
                 {
                     icon = "__space-age__/graphics/icons/iron-bacteria.png",
@@ -263,7 +263,7 @@ if mods["BrassTacksMk2"] or mods["IfNickelMk2"] then
                 {
                     icon = "__pf-sa-compat__/graphics/icons/philosophers-hormone.png",
                     icon_size = 64,
-                    icon_mipmaps = 4,        
+                    icon_mipmaps = 4,
                 },
                 {
                     icon = "__space-age__/graphics/icons/copper-bacteria.png",
@@ -494,7 +494,7 @@ if settings.startup["planetfall-postgame-logistics"].value then
     promethify(data.raw["splitter"]["turbo-splitter"])
     promethify(data.raw["corpse"]["turbo-splitter-remnants"])
     promethify(data.raw["explosion"]["turbo-splitter-explosion"])
-    
+
     promethify(data.raw["item"]["turbo-loader"])
     promethify(data.raw["loader"]["turbo-loader"])
 
@@ -506,6 +506,7 @@ if settings.startup["planetfall-postgame-logistics"].value then
     data.raw["underground-belt"]["superposition-underground-belt"].structure.frozen_patch_in = data.raw["underground-belt"]["turbo-underground-belt"].structure.frozen_patch_in
     data.raw["underground-belt"]["superposition-underground-belt"].structure.frozen_patch_out = data.raw["underground-belt"]["turbo-underground-belt"].structure.frozen_patch_out
 
+    data.raw["cargo-wagon"]["cargo-wagon"].fast_replaceable_group = "cargo-wagon"
     local new_cargo_wagon = table.deepcopy(data.raw["cargo-wagon"]["cargo-wagon"])
     new_cargo_wagon.name = "extradimensional-cargo-wagon"
     new_cargo_wagon.minable.result = "extradimensional-cargo-wagon"
@@ -553,6 +554,8 @@ if settings.startup["planetfall-postgame-logistics"].value then
         tint = {r=0.6,g=0.8,b=1}
     }}
 
+    data.raw["fluid-wagon"]["fluid-wagon"].fast_replaceable_group = "fluid-wagon"
+
     local new_fluid_wagon = table.deepcopy(data.raw["fluid-wagon"]["fluid-wagon"])
     new_fluid_wagon.name = "extradimensional-fluid-wagon"
     new_fluid_wagon.minable.result = "extradimensional-fluid-wagon"
@@ -593,6 +596,7 @@ if settings.startup["planetfall-postgame-logistics"].value then
         tint = {r=0.6,g=0.8,b=1}
     }}
 
+    data.raw["cargo-bay"]["cargo-bay"].fast_replaceable_group = "cargo-bay"
     local new_cargo_bay = table.deepcopy(data.raw["cargo-bay"]["cargo-bay"])
     new_cargo_bay.inventory_size_bonus = 40
     new_cargo_bay.name = "extradimensional-cargo-bay"
@@ -605,7 +609,9 @@ if settings.startup["planetfall-postgame-logistics"].value then
     }}
     local function recursively_set_tint(g)
         if not g.tint then
-            g.tint = {r=0.5,g=0.75,b=1}
+            if g.filename then
+                g.tint = {r=0.5,g=0.75,b=1}
+            end
             for k, v in pairs(g) do
                 if k ~= "tint" and k ~= "shift" and type(v) == "table" then
                     recursively_set_tint(v)
@@ -614,10 +620,10 @@ if settings.startup["planetfall-postgame-logistics"].value then
         end
     end
     if new_cargo_bay.graphics_set then
-        --recursively_set_tint(new_cargo_bay.graphics_set)
+        recursively_set_tint(new_cargo_bay.graphics_set)
     end
     if new_cargo_bay.platform_graphics_set then
-        --recursively_set_tint(new_cargo_bay.platform_graphics_set)
+        recursively_set_tint(new_cargo_bay.platform_graphics_set)
     end
     --[[
     for k, v in pairs(new_cargo_bay.graphics_set.connections) do
@@ -1010,7 +1016,7 @@ if settings.startup["planetfall-postgame-logistics"].value then
         rm.AddIngredient("superposition-transport-belt", "quantum-encabulator", 1)
 
         rm.AddIngredient("superposition-underground-belt", "quantum-encabulator", 2)
-        
+
         rm.MultiplyRecipe("superposition-splitter", 5)
         rm.AddIngredient("superposition-splitter", "quantum-encabulator", 2)
 
